@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/home/static/css/main.d6e3c167.chunk.css",
-    "main.js": "/home/static/js/main.cf92c857.chunk.js",
-    "main.js.map": "/home/static/js/main.cf92c857.chunk.js.map",
-    "runtime-main.js": "/home/static/js/runtime-main.1e703b0d.js",
-    "runtime-main.js.map": "/home/static/js/runtime-main.1e703b0d.js.map",
-    "static/css/2.829c9cb5.chunk.css": "/home/static/css/2.829c9cb5.chunk.css",
-    "static/js/2.449c4bcb.chunk.js": "/home/static/js/2.449c4bcb.chunk.js",
-    "static/js/2.449c4bcb.chunk.js.map": "/home/static/js/2.449c4bcb.chunk.js.map",
-    "index.html": "/home/index.html",
-    "precache-manifest.f4e448e02fab99b4d8c74ae63a8143e7.js": "/home/precache-manifest.f4e448e02fab99b4d8c74ae63a8143e7.js",
-    "service-worker.js": "/home/service-worker.js",
-    "static/css/2.829c9cb5.chunk.css.map": "/home/static/css/2.829c9cb5.chunk.css.map",
-    "static/css/main.d6e3c167.chunk.css.map": "/home/static/css/main.d6e3c167.chunk.css.map",
-    "static/js/2.449c4bcb.chunk.js.LICENSE.txt": "/home/static/js/2.449c4bcb.chunk.js.LICENSE.txt",
-    "static/media/NervousCardx2.png": "/home/static/media/NervousCardx2.e835a5cd.png"
+    "main.css": "/static/css/main.d6e3c167.chunk.css",
+    "main.js": "/static/js/main.71f319ba.chunk.js",
+    "main.js.map": "/static/js/main.71f319ba.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6b3488d1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6b3488d1.js.map",
+    "static/css/2.829c9cb5.chunk.css": "/static/css/2.829c9cb5.chunk.css",
+    "static/js/2.449c4bcb.chunk.js": "/static/js/2.449c4bcb.chunk.js",
+    "static/js/2.449c4bcb.chunk.js.map": "/static/js/2.449c4bcb.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.dee6069897df0735a8e45aa4d5938ba2.js": "/precache-manifest.dee6069897df0735a8e45aa4d5938ba2.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.829c9cb5.chunk.css.map": "/static/css/2.829c9cb5.chunk.css.map",
+    "static/css/main.d6e3c167.chunk.css.map": "/static/css/main.d6e3c167.chunk.css.map",
+    "static/js/2.449c4bcb.chunk.js.LICENSE.txt": "/static/js/2.449c4bcb.chunk.js.LICENSE.txt",
+    "static/media/NervousCardx2.png": "/static/media/NervousCardx2.e835a5cd.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.1e703b0d.js",
+    "static/js/runtime-main.6b3488d1.js",
     "static/css/2.829c9cb5.chunk.css",
     "static/js/2.449c4bcb.chunk.js",
     "static/css/main.d6e3c167.chunk.css",
-    "static/js/main.cf92c857.chunk.js"
+    "static/js/main.71f319ba.chunk.js"
   ]
 }
