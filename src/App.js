@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import SalvinificationPage from './pages/SalvinificationPage';
+// import SalvinificationPage from './pages/SalvinificationPage';
 
 import APLogo from '../src/assets/images/AP-logo_small.png';
 

@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,5 +47,5 @@
   "main": "index.js",
   "devDependencies": {},
   
-  "homepage": "http://localhost:3000"
+  "homepage": "https://alessandropalumbo97.github.io/MY-portfolio/."
 }
