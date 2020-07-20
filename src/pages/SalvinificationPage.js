@@ -107,21 +107,29 @@ class SalvinificationPage extends React.Component {
 
   constructor(props) {
     super(props);
+    
+    this.machineRef = React.createRef();
+    this.alertRef = React.createRef();
+    this.salviniAlertRef = React.createRef();
+    this.randomBtnRef = React.createRef();
+
     this.state = {
       salviniName: "",
       bgDelay: 175,
-      time: 0
+      time: 0,
     }
- 
+  }
+
+  componentDidMount() {
     const results = {
       machine: document.querySelector('#machine2Result')
     };
-    const el = document.querySelector('#machine');
-    const machine = new SlotMachine(el, { active: 0 });
+    // const el = document.querySelector('#machine');
+    const el = this.machineRef.current;
+    this.machine = new SlotMachine(el, { active: 0 });
+    console.log(this.salviniAlertRef.current);
+    this.btn = this.randomBtnRef.current;
   }
-
-  btn = document.querySelector('#randomizeButton');
-  
 
   onSpinClick = () => {
     this.showMachine();
@@ -156,8 +164,8 @@ class SalvinificationPage extends React.Component {
   /**************        NOTA_GIO: FINO A QUI HO MODIFICATO IL CODICE            ***************/
 
   closeAlert = () => {
-    if (document.getElementById("myAlert").style.display !== "none") {
-      document.getElementById("myAlert").style.display = "none";
+    if (this.alertRef.current.style.display !== "none") {
+      this.alertRef.current.style.display = "none";
     }
   }
 
@@ -479,7 +487,7 @@ class SalvinificationPage extends React.Component {
   }
 
   showAlert = () => {
-    document.getElementById("salviniAlert").innerHTML = '<div id="myAlert" class="mt-4 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onclick="closeAlert()" id="btnClose">&times;</button></div>';
+    this.salviniAlertRef.current.innerHTML = '<div id="myAlert" ref="this.alertRef" class="mt-4 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onclick="closeAlert()" id="btnClose">&times;</button></div>';
   }
 
   showBtnScreenshot = () => {
@@ -491,7 +499,7 @@ class SalvinificationPage extends React.Component {
 
   stroboBg = () => {
     document.getElementById("randomize").classList.toggle("bg-danger");
-    document.getElementById("salviniAlert").classList.toggle("bg-danger");
+    this.salviniAlertRef.current.classList.toggle("bg-danger");
     console.log("tempoo");
   }
 
@@ -500,29 +508,27 @@ class SalvinificationPage extends React.Component {
     document.getElementById("randomize").classList.remove("bg-secondary");
 
     this.showAlert();
-    document.getElementById("salviniAlert").classList.add("bg-danger");
-    document.getElementById("salviniAlert").classList.remove("bg-secondary");
+    this.salviniAlertRef.current.classList.add("bg-danger");
+    this.salviniAlertRef.current.classList.remove("bg-secondary");
   }
 
   restoreBg = () => {
     document.getElementById("randomize").classList.add("bg-secondary");
     document.getElementById("randomize").classList.remove("bg-danger");
 
-    document.getElementById("salviniAlert").classList.add("bg-secondary");
-    document.getElementById("salviniAlert").classList.remove("bg-danger");
+    this.salviniAlertRef.current.classList.add("bg-secondary");
+    this.salviniAlertRef.current.classList.remove("bg-danger");
   }
 
   render() {
     return (
       <div>
-        <Hero title={this.props.title} subTitle={this.props.subTitle} text={this.props.text} />
-
-        <nav id="navSalvini" className="navbar navbar-expand-lg bg-primary row">
+        {/* <nav id="navSalvini" className="navbar navbar-expand-lg bg-primary row">
           <div id="txtSalvinification" className="navbar-brand text-light col-md-6 mr-4">SALVINIfication
         <p id="subtxtSalvinification" className="h5 text-warning">L'abito non fa il MONACO, ma il MINISTRO DEGLI INTERNI.</p>
           </div>
           <div id="txtNav" className="h2 text-light col-md-5 offset-md-1">Gira la ruota e scopri quale divisa indosserà oggi il ministro SALVINI per "salvare" il paese.</div>
-        </nav>
+        </nav> */}
 
         <div id="italianFlag" className="row">
           <div className="col-md-4 bg-success"></div>
@@ -530,7 +536,9 @@ class SalvinificationPage extends React.Component {
           <div className="col-md-4 bg-danger"></div>
         </div>
 
-        <div id="salviniAlert" className="row bg-secondary">
+        <Hero title={this.props.title} subTitle={this.props.subTitle} text={this.props.text} />
+
+        <div ref={this.salviniAlertRef} id="salviniAlert" className="row bg-secondary">
           <div className="col-md-12">
           </div>
         </div>
@@ -542,7 +550,7 @@ class SalvinificationPage extends React.Component {
                 <div id="toScreenshot">
                   <img className="mt-4 salvini" src={SalviniFace} alt="Salvini's face" />
                   <div id="bodyToScreen">
-                    <div id="machine" className="randomizeMachine dress">
+                    <div ref={this.machineRef} id="machine" className="randomizeMachine dress">
                       <div><img src={Dress0} alt="salvini dress 0" /></div>
                       <div><img src={Dress1} alt="salvini dress 1" /></div>
                       <div><img src={Dress2} alt="salvini dress 3" /></div>
@@ -635,14 +643,14 @@ class SalvinificationPage extends React.Component {
                       <div><img src={Dress89} alt="salvini dress 89" /></div>
                       <div><img src={Dress90} alt="salvini dress 90" /></div>
                     </div>
-                    <div id="ken"><img src={Naked} alt="salvini naked"/></div>
+                    <div id="ken"><img src={Naked} alt="salvini naked" /></div>
                   </div>
                 </div>
               </div>
               <div className="col-md-3 machineResult">
                 <p id="machine2Result"> </p>
                 <div className="">
-                  <button id="randomizeButton" className="btn btn-danger btn-circle" type="button" onClick={this.onSpinClick}>Spin!</button>
+                  <button ref={this.randomBtnRef} id="randomizeButton" className="btn btn-danger btn-circle" type="button" onClick={this.onSpinClick}>Spin!</button>
                   <button id="btnScreenshot" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
                   <div className="fb-share-button" data-href="https://www.salvinification.it" data-layout="button" data-size="large" data-mobile-iframe="true">
                     <button type="button" className="btn btn-primary text-center" id="btnShare">
@@ -657,12 +665,11 @@ class SalvinificationPage extends React.Component {
           </div>
         </div>
 
-        <script src={$}></script>
-        <script src={usePopper}></script>
-        <script src="js/html2canvas.js"></script>
-        <script src="dist/slotmachine.min.js"></script>
-        <script src={SlotMachine}></script>
-        <script id="codeScript2" src="js/main.js"></script>
+        {/* <script src={$}></script> */}
+        {/* <script src={usePopper}></script> */}
+        {/* <script src="js/html2canvas.js"></script> */}
+        {/* <script src="dist/slotmachine.min.js"></script> */}
+        {/* <script src={SlotMachine}></script> */}
       </div>
     );
   }

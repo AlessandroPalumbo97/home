@@ -19,22 +19,22 @@ class Carousel extends React.Component {
           link: '',
           selected: false
         },
-        {
-          id: 1,
-          title: 'Nervous Fighter',
-          subTitle: 'Please don\'t be calm!',
-          imgSrc: nervous,
-          link: '',
-          selected: false
-        },
-        {
-          id: 2,
-          title: 'Nervous Fighter',
-          subTitle: 'Please don\'t be calm!',
-          imgSrc: nervous,
-          link: '',
-          selected: false
-        }
+        // {
+        //   id: 1,
+        //   title: 'Nervous Fighter',
+        //   subTitle: 'Please don\'t be calm!',
+        //   imgSrc: nervous,
+        //   link: '',
+        //   selected: false
+        // },
+        // {
+        //   id: 2,
+        //   title: 'Nervous Fighter',
+        //   subTitle: 'Please don\'t be calm!',
+        //   imgSrc: nervous,
+        //   link: '',
+        //   selected: false
+        // }
       ]
     }
   }
