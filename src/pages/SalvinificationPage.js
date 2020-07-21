@@ -99,8 +99,9 @@ import Naked from '../assets/salvinification/Ken.png';
 
 // Scripts
 import $ from "jquery";
-import { usePopper } from 'react-popper';
+// import { usePopper } from 'react-popper';
 import SlotMachine from 'jquery-slotmachine/lib/slot-machine.js';
+import html2canvas from 'html2canvas';
 
 
 class SalvinificationPage extends React.Component {
@@ -112,6 +113,10 @@ class SalvinificationPage extends React.Component {
     this.alertRef = React.createRef();
     this.salviniAlertRef = React.createRef();
     this.randomBtnRef = React.createRef();
+    this.salviniNameRef = React.createRef();
+    this.screenshotRef = React.createRef();
+    this.randomizeRef = React.createRef();
+    this.bodyToScreenRef = React.createRef();
 
     this.state = {
       salviniName: "",
@@ -121,13 +126,11 @@ class SalvinificationPage extends React.Component {
   }
 
   componentDidMount() {
-    const results = {
-      machine: document.querySelector('#machine2Result')
-    };
-    // const el = document.querySelector('#machine');
+    // const results = {
+    //   machine: document.querySelector('#machine2Result')
+    // };
     const el = this.machineRef.current;
     this.machine = new SlotMachine(el, { active: 0 });
-    console.log(this.salviniAlertRef.current);
     this.btn = this.randomBtnRef.current;
   }
 
@@ -140,11 +143,12 @@ class SalvinificationPage extends React.Component {
 
   onComplete = (active) => {
     this.salviniName = this.imageToName(this.machine.visibleTile);
-    document.getElementById("machine2Result").innerHTML = "<div class='text-dark h4'>HAI SBLOCCATO: <p id='salviniName' class='text-danger'>" + this.salviniName + "</p></div>";
+    console.log(this.machine.visibleTile);
+    this.salviniNameRef.current.innerHTML = "<div className='text-dark h4'>HAI SBLOCCATO: <p id='salviniName' className='text-danger'>" + this.salviniName + "</p></div>";
 
     if (this.machine.visibleTile === 10) {
       this.redBg();
-      this.time = setInterval(this.stroboBg(), this.bgDelay);
+      this.time = setInterval(this.stroboBg(), this.state.bgDelay);
     } else {
       this.restoreBg();
       clearInterval(this.time);
@@ -167,6 +171,230 @@ class SalvinificationPage extends React.Component {
     if (this.alertRef.current.style.display !== "none") {
       this.alertRef.current.style.display = "none";
     }
+  }
+
+  screenshot = () => {
+    var activeEl = this.machine.visibleTile;
+    // Remove machine div
+    var divToRemove = this.machineRef.current;
+    divToRemove.parentNode.removeChild(divToRemove);
+    // Write the active body
+    this.setBody();
+    this.bodyToScreenRef.current.innerHTML = '<div><img src="img/Scontornate/' + activeEl + '.png" /></div>';
+    // Screenshot
+    html2canvas(this.screenshotRef.current).then(function (canvas) {
+      this.saveAs(canvas.toDataURL(), 'salvinification.png');
+      window.location.reload();
+    });
+  }
+
+  saveAs = (url, salvinification) => {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+      link.href = url;
+      link.download = salvinification;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    else {
+      window.open(url);
+    }
+  }
+
+  setBody = () => {
+    this.bodyToScreenRef.current.style.top = "-160px";
+    this.bodyToScreenRef.current.style.left = "120px";
+    this.bodyToScreenRef.current.style.width = "75%";
+  }
+
+  showAlert = () => {
+    this.salviniAlertRef.current.style.display = 'block';
+  }
+
+  showBtnScreenshot = () => {
+    var btnScreenshot = document.getElementById("btnScreenshot");
+    if (btnScreenshot != null) {
+      btnScreenshot.style.display = "block";
+    }
+  }
+
+  stroboBg = () => {
+    this.randomizeRef.current.classList.toggle("bg-danger");
+    this.salviniAlertRef.current.classList.toggle("bg-danger");
+    console.log("tempoo");
+  }
+
+  redBg = () => {
+    this.randomizeRef.current.classList.add("bg-danger");
+    this.randomizeRef.current.classList.remove("bg-secondary");
+
+    this.showAlert();
+    this.salviniAlertRef.current.classList.add("bg-danger");
+    this.salviniAlertRef.current.classList.remove("bg-secondary");
+  }
+
+  restoreBg = () => {
+    this.randomizeRef.current.classList.add("bg-secondary");
+    this.randomizeRef.current.classList.remove("bg-danger");
+
+    this.salviniAlertRef.current.classList.add("bg-secondary");
+    this.salviniAlertRef.current.classList.remove("bg-danger");
+  }
+
+  render() {
+    return (
+      <div>
+        {/* <nav id="navSalvini" className="navbar navbar-expand-lg bg-primary row">
+          <div id="txtSalvinification" className="navbar-brand text-light col-md-6 mr-4">SALVINIfication
+        <p id="subtxtSalvinification" className="h5 text-warning">L'abito non fa il MONACO, ma il MINISTRO DEGLI INTERNI.</p>
+          </div>
+          <div id="txtNav" className="h2 text-light col-md-5 offset-md-1">Gira la ruota e scopri quale divisa indosserà oggi il ministro SALVINI per "salvare" il paese.</div>
+        </nav> */}
+
+        <div id="italianFlag" className="row">
+          <div className="col-md-4 bg-success"></div>
+          <div className="col-md-4 bg-light"></div>
+          <div className="col-md-4 bg-danger"></div>
+        </div>
+
+        <Hero title={this.props.title} subTitle={this.props.subTitle} text={this.props.text} />
+
+        <div ref={this.salviniAlertRef} id="salviniAlert" className="row bg-secondary">
+          <div className="col-md-12">
+            <div ref={this.alertRef} id="myAlert" className="mt-4 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.closeAlert} id="btnClose">&times;</button></div>
+          </div>
+        </div>
+
+        <div ref={this.randomizeRef} id="randomize" className="bg-secondary">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 offset-md-3">
+                <div ref={this.screenshotRef} id="toScreenshot">
+                  <img className="mt-4 salvini" src={SalviniFace} alt="Salvini's face" />
+                  <div ref={this.bodyToScreenRef} id="bodyToScreen">
+                    <div ref={this.machineRef} id="machine" className="randomizeMachine dress">
+                      <div><img src={Dress0} alt="salvini dress 0" /></div>
+                      <div><img src={Dress1} alt="salvini dress 1" /></div>
+                      <div><img src={Dress2} alt="salvini dress 3" /></div>
+                      <div><img src={Dress3} alt="salvini dress 2" /></div>
+                      <div><img src={Dress4} alt="salvini dress 4" /></div>
+                      <div><img src={Dress5} alt="salvini dress 5" /></div>
+                      <div><img src={Dress6} alt="salvini dress 6" /></div>
+                      <div><img src={Dress7} alt="salvini dress 7" /></div>
+                      <div><img src={Dress8} alt="salvini dress 8" /></div>
+                      <div><img src={Dress9} alt="salvini dress 9" /></div>
+                      <div><img src={Dress10} alt="salvini dress 10" /></div>
+                      <div><img src={Dress11} alt="salvini dress 11" /></div>
+                      <div><img src={Dress12} alt="salvini dress 12" /></div>
+                      <div><img src={Dress13} alt="salvini dress 13" /></div>
+                      <div><img src={Dress14} alt="salvini dress 14" /></div>
+                      <div><img src={Dress15} alt="salvini dress 15" /></div>
+                      <div><img src={Dress16} alt="salvini dress 16" /></div>
+                      <div><img src={Dress17} alt="salvini dress 17" /></div>
+                      <div><img src={Dress18} alt="salvini dress 18" /></div>
+                      <div><img src={Dress19} alt="salvini dress 19" /></div>
+                      <div><img src={Dress20} alt="salvini dress 20" /></div>
+                      <div><img src={Dress21} alt="salvini dress 21" /></div>
+                      <div><img src={Dress22} alt="salvini dress 22" /></div>
+                      <div><img src={Dress23} alt="salvini dress 23" /></div>
+                      <div><img src={Dress24} alt="salvini dress 24" /></div>
+                      <div><img src={Dress25} alt="salvini dress 25" /></div>
+                      <div><img src={Dress26} alt="salvini dress 26" /></div>
+                      <div><img src={Dress27} alt="salvini dress 27" /></div>
+                      <div><img src={Dress28} alt="salvini dress 28" /></div>
+                      <div><img src={Dress29} alt="salvini dress 29" /></div>
+                      <div><img src={Dress30} alt="salvini dress 30" /></div>
+                      <div><img src={Dress31} alt="salvini dress 31" /></div>
+                      <div><img src={Dress32} alt="salvini dress 32" /></div>
+                      <div><img src={Dress33} alt="salvini dress 33" /></div>
+                      <div><img src={Dress34} alt="salvini dress 34" /></div>
+                      <div><img src={Dress35} alt="salvini dress 35" /></div>
+                      <div><img src={Dress36} alt="salvini dress 36" /></div>
+                      <div><img src={Dress37} alt="salvini dress 37" /></div>
+                      <div><img src={Dress38} alt="salvini dress 38" /></div>
+                      <div><img src={Dress39} alt="salvini dress 39" /></div>
+                      <div><img src={Dress40} alt="salvini dress 40" /></div>
+                      <div><img src={Dress41} alt="salvini dress 41" /></div>
+                      <div><img src={Dress42} alt="salvini dress 42" /></div>
+                      <div><img src={Dress43} alt="salvini dress 43" /></div>
+                      <div><img src={Dress44} alt="salvini dress 44" /></div>
+                      <div><img src={Dress45} alt="salvini dress 45" /></div>
+                      <div><img src={Dress46} alt="salvini dress 46" /></div>
+                      <div><img src={Dress47} alt="salvini dress 47" /></div>
+                      <div><img src={Dress48} alt="salvini dress 48" /></div>
+                      <div><img src={Dress49} alt="salvini dress 49" /></div>
+                      <div><img src={Dress50} alt="salvini dress 50" /></div>
+                      <div><img src={Dress51} alt="salvini dress 51" /></div>
+                      <div><img src={Dress52} alt="salvini dress 52" /></div>
+                      <div><img src={Dress53} alt="salvini dress 53" /></div>
+                      <div><img src={Dress54} alt="salvini dress 54" /></div>
+                      <div><img src={Dress55} alt="salvini dress 55" /></div>
+                      <div><img src={Dress56} alt="salvini dress 56" /></div>
+                      <div><img src={Dress57} alt="salvini dress 57" /></div>
+                      <div><img src={Dress58} alt="salvini dress 58" /></div>
+                      <div><img src={Dress59} alt="salvini dress 59" /></div>
+                      <div><img src={Dress60} alt="salvini dress 60" /></div>
+                      <div><img src={Dress61} alt="salvini dress 61" /></div>
+                      <div><img src={Dress62} alt="salvini dress 62" /></div>
+                      <div><img src={Dress63} alt="salvini dress 63" /></div>
+                      <div><img src={Dress64} alt="salvini dress 64" /></div>
+                      <div><img src={Dress65} alt="salvini dress 65" /></div>
+                      <div><img src={Dress66} alt="salvini dress 66" /></div>
+                      <div><img src={Dress67} alt="salvini dress 67" /></div>
+                      <div><img src={Dress68} alt="salvini dress 68" /></div>
+                      <div><img src={Dress69} alt="salvini dress 69" /></div>
+                      <div><img src={Dress70} alt="salvini dress 70" /></div>
+                      <div><img src={Dress71} alt="salvini dress 71" /></div>
+                      <div><img src={Dress72} alt="salvini dress 72" /></div>
+                      <div><img src={Dress73} alt="salvini dress 73" /></div>
+                      <div><img src={Dress74} alt="salvini dress 74" /></div>
+                      <div><img src={Dress75} alt="salvini dress 75" /></div>
+                      <div><img src={Dress76} alt="salvini dress 76" /></div>
+                      <div><img src={Dress77} alt="salvini dress 77" /></div>
+                      <div><img src={Dress78} alt="salvini dress 78" /></div>
+                      <div><img src={Dress79} alt="salvini dress 79" /></div>
+                      <div><img src={Dress80} alt="salvini dress 80" /></div>
+                      <div><img src={Dress81} alt="salvini dress 81" /></div>
+                      <div><img src={Dress82} alt="salvini dress 82" /></div>
+                      <div><img src={Dress83} alt="salvini dress 83" /></div>
+                      <div><img src={Dress84} alt="salvini dress 84" /></div>
+                      <div><img src={Dress85} alt="salvini dress 85" /></div>
+                      <div><img src={Dress86} alt="salvini dress 86" /></div>
+                      <div><img src={Dress87} alt="salvini dress 87" /></div>
+                      <div><img src={Dress88} alt="salvini dress 88" /></div>
+                      <div><img src={Dress89} alt="salvini dress 89" /></div>
+                      <div><img src={Dress90} alt="salvini dress 90" /></div>
+                    </div>
+                    <div id="ken"><img src={Naked} alt="salvini naked" /></div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3 machineResult">
+                <p ref={this.salviniNameRef} id="machine2Result"> </p>
+                <div className="">
+                  <button ref={this.randomBtnRef} id="randomizeButton" className="btn btn-danger btn-circle" type="button" onClick={this.onSpinClick}>Spin!</button>
+                  <button id="btnScreenshot" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
+                  <div className="fb-share-button" data-href="https://www.salvinification.it" data-layout="button" data-size="large" data-mobile-iframe="true">
+                    <button type="button" className="btn btn-primary text-center" id="btnShare">
+                      <img src="img/fbicon.png" alt="facebook icon" id="fbicon" />
+                      <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.salvinification.it%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore" id="aShare">Condividi</a>
+                    </button>
+                  </div>
+                  <a id="btnTweet" className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Gira%20la%20ruota%20e%20scopri%20quale%20divisa%20indosserà%20ogg%20il%20ministro%20Salvini%20per%20salvare%20il%20paese%20" data-size="large">Tweet</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <script src={$}></script> */}
+        {/* <script src={usePopper}></script> */}
+        {/* <script src="js/html2canvas.js"></script> */}
+        {/* <script src="dist/slotmachine.min.js"></script> */}
+        {/* <script src={SlotMachine}></script> */}
+      </div>
+    );
   }
 
   imageToName = (i) => {
@@ -443,235 +671,13 @@ class SalvinificationPage extends React.Component {
         name = "Salvini Hutton";
         break;
       case 90:
+      case -1:
         name = "Ronald Mc'Salvin";
         break;
       default:
         name = "&nbsp;";
     }
     return name;
-  }
-
-  screenshot = () => {
-    var activeEl = this.machine.visibleTile;
-    // Remove machine div
-    var divToRemove = document.getElementById("machine");
-    divToRemove.parentNode.removeChild(divToRemove);
-    // Write the active body
-    this.setBody();
-    document.getElementById("bodyToScreen").innerHTML = '<div><img src="img/Scontornate/' + activeEl + '.png" /></div>';
-    // Screenshot
-    this.html2canvas(document.getElementById("toScreenshot")).then(function (canvas) {
-      this.saveAs(canvas.toDataURL(), 'salvinification.png');
-      window.location.reload();
-    });
-  }
-
-  saveAs = (url, salvinification) => {
-    var link = document.createElement('a');
-    if (typeof link.download === 'string') {
-      link.href = url;
-      link.download = salvinification;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-    else {
-      window.open(url);
-    }
-  }
-
-  setBody = () => {
-    document.getElementById("bodyToScreen").style.top = "-160px";
-    document.getElementById("bodyToScreen").style.left = "120px";
-    document.getElementById("bodyToScreen").style.width = "75%";
-  }
-
-  showAlert = () => {
-    this.salviniAlertRef.current.innerHTML = '<div id="myAlert" ref="this.alertRef" class="mt-4 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onclick="closeAlert()" id="btnClose">&times;</button></div>';
-  }
-
-  showBtnScreenshot = () => {
-    var btnScreenshot = document.getElementById("btnScreenshot");
-    if (btnScreenshot != null) {
-      btnScreenshot.style.display = "block";
-    }
-  }
-
-  stroboBg = () => {
-    document.getElementById("randomize").classList.toggle("bg-danger");
-    this.salviniAlertRef.current.classList.toggle("bg-danger");
-    console.log("tempoo");
-  }
-
-  redBg = () => {
-    document.getElementById("randomize").classList.add("bg-danger");
-    document.getElementById("randomize").classList.remove("bg-secondary");
-
-    this.showAlert();
-    this.salviniAlertRef.current.classList.add("bg-danger");
-    this.salviniAlertRef.current.classList.remove("bg-secondary");
-  }
-
-  restoreBg = () => {
-    document.getElementById("randomize").classList.add("bg-secondary");
-    document.getElementById("randomize").classList.remove("bg-danger");
-
-    this.salviniAlertRef.current.classList.add("bg-secondary");
-    this.salviniAlertRef.current.classList.remove("bg-danger");
-  }
-
-  render() {
-    return (
-      <div>
-        {/* <nav id="navSalvini" className="navbar navbar-expand-lg bg-primary row">
-          <div id="txtSalvinification" className="navbar-brand text-light col-md-6 mr-4">SALVINIfication
-        <p id="subtxtSalvinification" className="h5 text-warning">L'abito non fa il MONACO, ma il MINISTRO DEGLI INTERNI.</p>
-          </div>
-          <div id="txtNav" className="h2 text-light col-md-5 offset-md-1">Gira la ruota e scopri quale divisa indosserà oggi il ministro SALVINI per "salvare" il paese.</div>
-        </nav> */}
-
-        <div id="italianFlag" className="row">
-          <div className="col-md-4 bg-success"></div>
-          <div className="col-md-4 bg-light"></div>
-          <div className="col-md-4 bg-danger"></div>
-        </div>
-
-        <Hero title={this.props.title} subTitle={this.props.subTitle} text={this.props.text} />
-
-        <div ref={this.salviniAlertRef} id="salviniAlert" className="row bg-secondary">
-          <div className="col-md-12">
-          </div>
-        </div>
-
-        <div id="randomize" className="bg-secondary">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 offset-md-3">
-                <div id="toScreenshot">
-                  <img className="mt-4 salvini" src={SalviniFace} alt="Salvini's face" />
-                  <div id="bodyToScreen">
-                    <div ref={this.machineRef} id="machine" className="randomizeMachine dress">
-                      <div><img src={Dress0} alt="salvini dress 0" /></div>
-                      <div><img src={Dress1} alt="salvini dress 1" /></div>
-                      <div><img src={Dress2} alt="salvini dress 3" /></div>
-                      <div><img src={Dress3} alt="salvini dress 2" /></div>
-                      <div><img src={Dress4} alt="salvini dress 4" /></div>
-                      <div><img src={Dress5} alt="salvini dress 5" /></div>
-                      <div><img src={Dress6} alt="salvini dress 6" /></div>
-                      <div><img src={Dress7} alt="salvini dress 7" /></div>
-                      <div><img src={Dress8} alt="salvini dress 8" /></div>
-                      <div><img src={Dress9} alt="salvini dress 9" /></div>
-                      <div><img src={Dress10} alt="salvini dress 10" /></div>
-                      <div><img src={Dress11} alt="salvini dress 11" /></div>
-                      <div><img src={Dress12} alt="salvini dress 12" /></div>
-                      <div><img src={Dress13} alt="salvini dress 13" /></div>
-                      <div><img src={Dress14} alt="salvini dress 14" /></div>
-                      <div><img src={Dress15} alt="salvini dress 15" /></div>
-                      <div><img src={Dress16} alt="salvini dress 16" /></div>
-                      <div><img src={Dress17} alt="salvini dress 17" /></div>
-                      <div><img src={Dress18} alt="salvini dress 18" /></div>
-                      <div><img src={Dress19} alt="salvini dress 19" /></div>
-                      <div><img src={Dress20} alt="salvini dress 20" /></div>
-                      <div><img src={Dress21} alt="salvini dress 21" /></div>
-                      <div><img src={Dress22} alt="salvini dress 22" /></div>
-                      <div><img src={Dress23} alt="salvini dress 23" /></div>
-                      <div><img src={Dress24} alt="salvini dress 24" /></div>
-                      <div><img src={Dress25} alt="salvini dress 25" /></div>
-                      <div><img src={Dress26} alt="salvini dress 26" /></div>
-                      <div><img src={Dress27} alt="salvini dress 27" /></div>
-                      <div><img src={Dress28} alt="salvini dress 28" /></div>
-                      <div><img src={Dress29} alt="salvini dress 29" /></div>
-                      <div><img src={Dress30} alt="salvini dress 30" /></div>
-                      <div><img src={Dress31} alt="salvini dress 31" /></div>
-                      <div><img src={Dress32} alt="salvini dress 32" /></div>
-                      <div><img src={Dress33} alt="salvini dress 33" /></div>
-                      <div><img src={Dress34} alt="salvini dress 34" /></div>
-                      <div><img src={Dress35} alt="salvini dress 35" /></div>
-                      <div><img src={Dress36} alt="salvini dress 36" /></div>
-                      <div><img src={Dress37} alt="salvini dress 37" /></div>
-                      <div><img src={Dress38} alt="salvini dress 38" /></div>
-                      <div><img src={Dress39} alt="salvini dress 39" /></div>
-                      <div><img src={Dress40} alt="salvini dress 40" /></div>
-                      <div><img src={Dress41} alt="salvini dress 41" /></div>
-                      <div><img src={Dress42} alt="salvini dress 42" /></div>
-                      <div><img src={Dress43} alt="salvini dress 43" /></div>
-                      <div><img src={Dress44} alt="salvini dress 44" /></div>
-                      <div><img src={Dress45} alt="salvini dress 45" /></div>
-                      <div><img src={Dress46} alt="salvini dress 46" /></div>
-                      <div><img src={Dress47} alt="salvini dress 47" /></div>
-                      <div><img src={Dress48} alt="salvini dress 48" /></div>
-                      <div><img src={Dress49} alt="salvini dress 49" /></div>
-                      <div><img src={Dress50} alt="salvini dress 50" /></div>
-                      <div><img src={Dress51} alt="salvini dress 51" /></div>
-                      <div><img src={Dress52} alt="salvini dress 52" /></div>
-                      <div><img src={Dress53} alt="salvini dress 53" /></div>
-                      <div><img src={Dress54} alt="salvini dress 54" /></div>
-                      <div><img src={Dress55} alt="salvini dress 55" /></div>
-                      <div><img src={Dress56} alt="salvini dress 56" /></div>
-                      <div><img src={Dress57} alt="salvini dress 57" /></div>
-                      <div><img src={Dress58} alt="salvini dress 58" /></div>
-                      <div><img src={Dress59} alt="salvini dress 59" /></div>
-                      <div><img src={Dress60} alt="salvini dress 60" /></div>
-                      <div><img src={Dress61} alt="salvini dress 61" /></div>
-                      <div><img src={Dress62} alt="salvini dress 62" /></div>
-                      <div><img src={Dress63} alt="salvini dress 63" /></div>
-                      <div><img src={Dress64} alt="salvini dress 64" /></div>
-                      <div><img src={Dress65} alt="salvini dress 65" /></div>
-                      <div><img src={Dress66} alt="salvini dress 66" /></div>
-                      <div><img src={Dress67} alt="salvini dress 67" /></div>
-                      <div><img src={Dress68} alt="salvini dress 68" /></div>
-                      <div><img src={Dress69} alt="salvini dress 69" /></div>
-                      <div><img src={Dress70} alt="salvini dress 70" /></div>
-                      <div><img src={Dress71} alt="salvini dress 71" /></div>
-                      <div><img src={Dress72} alt="salvini dress 72" /></div>
-                      <div><img src={Dress73} alt="salvini dress 73" /></div>
-                      <div><img src={Dress74} alt="salvini dress 74" /></div>
-                      <div><img src={Dress75} alt="salvini dress 75" /></div>
-                      <div><img src={Dress76} alt="salvini dress 76" /></div>
-                      <div><img src={Dress77} alt="salvini dress 77" /></div>
-                      <div><img src={Dress78} alt="salvini dress 78" /></div>
-                      <div><img src={Dress79} alt="salvini dress 79" /></div>
-                      <div><img src={Dress80} alt="salvini dress 80" /></div>
-                      <div><img src={Dress81} alt="salvini dress 81" /></div>
-                      <div><img src={Dress82} alt="salvini dress 82" /></div>
-                      <div><img src={Dress83} alt="salvini dress 83" /></div>
-                      <div><img src={Dress84} alt="salvini dress 84" /></div>
-                      <div><img src={Dress85} alt="salvini dress 85" /></div>
-                      <div><img src={Dress86} alt="salvini dress 86" /></div>
-                      <div><img src={Dress87} alt="salvini dress 87" /></div>
-                      <div><img src={Dress88} alt="salvini dress 88" /></div>
-                      <div><img src={Dress89} alt="salvini dress 89" /></div>
-                      <div><img src={Dress90} alt="salvini dress 90" /></div>
-                    </div>
-                    <div id="ken"><img src={Naked} alt="salvini naked" /></div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3 machineResult">
-                <p id="machine2Result"> </p>
-                <div className="">
-                  <button ref={this.randomBtnRef} id="randomizeButton" className="btn btn-danger btn-circle" type="button" onClick={this.onSpinClick}>Spin!</button>
-                  <button id="btnScreenshot" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
-                  <div className="fb-share-button" data-href="https://www.salvinification.it" data-layout="button" data-size="large" data-mobile-iframe="true">
-                    <button type="button" className="btn btn-primary text-center" id="btnShare">
-                      <img src="img/fbicon.png" alt="facebook icon" id="fbicon" />
-                      <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.salvinification.it%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore" id="aShare">Condividi</a>
-                    </button>
-                  </div>
-                  <a id="btnTweet" className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Gira%20la%20ruota%20e%20scopri%20quale%20divisa%20indosserà%20ogg%20il%20ministro%20Salvini%20per%20salvare%20il%20paese%20" data-size="large">Tweet</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* <script src={$}></script> */}
-        {/* <script src={usePopper}></script> */}
-        {/* <script src="js/html2canvas.js"></script> */}
-        {/* <script src="dist/slotmachine.min.js"></script> */}
-        {/* <script src={SlotMachine}></script> */}
-      </div>
-    );
   }
 }
 

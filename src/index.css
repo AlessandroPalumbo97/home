@@ -229,7 +229,7 @@ img {
 }
 
 #myAlert {
-	display: block;
+	display: none;
 	margin: auto;
 }
 
