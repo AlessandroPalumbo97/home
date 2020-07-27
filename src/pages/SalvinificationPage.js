@@ -101,8 +101,8 @@ import Naked from '../assets/salvinification/Ken.png';
 import $ from "jquery";
 // import { usePopper } from 'react-popper';
 import SlotMachine from 'jquery-slotmachine/lib/slot-machine.js';
+// import slotmachine from 'slot-machine/src/index'
 import html2canvas from 'html2canvas';
-
 
 class SalvinificationPage extends React.Component {
 
@@ -117,11 +117,17 @@ class SalvinificationPage extends React.Component {
     this.screenshotRef = React.createRef();
     this.randomizeRef = React.createRef();
     this.bodyToScreenRef = React.createRef();
+    this.bodyRef = React.createRef();
 
     this.state = {
-      salviniName: "",
+      salviniName: "DIO BOIA",
       bgDelay: 175,
       time: 0,
+      currentDress: null,
+      dresses: [
+        Dress0, Dress1, Dress2, Dress3, Dress4, Dress5, Dress6, Dress7, Dress8, Dress9, Dress10, Dress11, Dress12, Dress13, Dress14, Dress15, Dress16, Dress17, Dress18, Dress19, Dress20, Dress21, Dress22, Dress23, Dress24, Dress25, Dress26, Dress27, Dress28, Dress29, Dress30, Dress31, Dress32, Dress33, Dress34, Dress35, Dress36, Dress37, Dress38, Dress39, Dress40, Dress41, Dress42, Dress43, Dress44, Dress45, Dress46, Dress47, Dress48, Dress49, Dress50, Dress51, Dress52, Dress53, Dress54, Dress55, Dress56, Dress57, Dress58, Dress59, Dress60, Dress61, Dress62, Dress63, Dress64, Dress65, Dress66, Dress67, Dress68, Dress69, Dress70, Dress71, Dress72, Dress73, Dress74, Dress75, Dress76, Dress77, Dress78, Dress79, Dress80, Dress81, Dress82, Dress83, Dress84, Dress85, Dress86, Dress87, Dress88, Dress89, Dress90
+      ],
+      screen: false
     }
   }
 
@@ -132,6 +138,7 @@ class SalvinificationPage extends React.Component {
     const el = this.machineRef.current;
     this.machine = new SlotMachine(el, { active: 0 });
     this.btn = this.randomBtnRef.current;
+    this.bodyRef.current.style.display = "none";
   }
 
   onSpinClick = () => {
@@ -143,8 +150,8 @@ class SalvinificationPage extends React.Component {
 
   onComplete = (active) => {
     this.salviniName = this.imageToName(this.machine.visibleTile);
-    console.log(this.machine.visibleTile);
     this.salviniNameRef.current.innerHTML = "<div className='text-dark h4'>HAI SBLOCCATO: <p id='salviniName' className='text-danger'>" + this.salviniName + "</p></div>";
+    this.setState({currentDress: this.machine.visibleTile});
 
     if (this.machine.visibleTile === 10) {
       this.redBg();
@@ -174,17 +181,16 @@ class SalvinificationPage extends React.Component {
   }
 
   screenshot = () => {
-    var activeEl = this.machine.visibleTile;
-    // Remove machine div
     var divToRemove = this.machineRef.current;
     divToRemove.parentNode.removeChild(divToRemove);
-    // Write the active body
+
     this.setBody();
-    this.bodyToScreenRef.current.innerHTML = '<div><img src="img/Scontornate/' + activeEl + '.png" /></div>';
+    this.bodyRef.current.style.display = "block";
+
     // Screenshot
-    html2canvas(this.screenshotRef.current).then(function (canvas) {
-      this.saveAs(canvas.toDataURL(), 'salvinification.png');
-      window.location.reload();
+    html2canvas(this.screenshotRef.current).then((canvas) => {
+      this.saveAs(canvas.toDataURL("image/png"), 'salvinification.png');
+      // window.location.reload();
     });
   }
 
@@ -242,7 +248,7 @@ class SalvinificationPage extends React.Component {
     this.salviniAlertRef.current.classList.remove("bg-danger");
   }
 
-  render() {
+  render(body) {
     return (
       <div>
         {/* <nav id="navSalvini" className="navbar navbar-expand-lg bg-primary row">
@@ -265,7 +271,7 @@ class SalvinificationPage extends React.Component {
             <div ref={this.alertRef} id="myAlert" className="mt-4 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.closeAlert} id="btnClose">&times;</button></div>
           </div>
         </div>
-
+        
         <div ref={this.randomizeRef} id="randomize" className="bg-secondary">
           <div className="container">
             <div className="row">
@@ -367,7 +373,9 @@ class SalvinificationPage extends React.Component {
                       <div><img src={Dress90} alt="salvini dress 90" /></div>
                     </div>
                     <div id="ken"><img src={Naked} alt="salvini naked" /></div>
+                    <div ref={this.bodyRef}><img src={this.state.dresses[this.state.currentDress]} alt="DRESS" /></div>
                   </div>
+                  {/* <Body body={this.state.dresses[this.state.currentDress]} /> */}
                 </div>
               </div>
               <div className="col-md-3 machineResult">
@@ -680,6 +688,6 @@ class SalvinificationPage extends React.Component {
     return name;
   }
 }
-
+ 
 export default SalvinificationPage;
 
