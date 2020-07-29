@@ -1,13 +1,41 @@
-// import React from "react";
-// import { MDBContainer, MDBIframe } from "mdbreact";
+import React from "react";
+import { SpinningWheel } from "react-random-selection-wheel";
 
-// const IframePage = () => {
-//   return (
-//     <MDBContainer className="text-center">
-//       <MDBIframe src={} />
-//     </MDBContainer>
-//    <h1> CIAO </h1>
-//   );
-// }
+const wheelOptions = {
+  1: {
+    image: "./foo.jpg",
+    result: "./foo.jpg"
+  },
+  2: {
+    image: "./bar.jpg",
+    result: "./bar.jpg"
+  }
+}
+ 
+// React.render(
+//   <SpinningWheel
+//     sources={wheelOptions}
+//     displayResult={this.display.bind(this)}
+//   />
+// );
 
-// export default IframePage;
+class Spinner extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+
+  displayResult(spinResult) {
+    return <img src={`${spinResult}`} alt={"result"} />
+  }
+
+  render() {
+    return(
+      <SpinningWheel
+        sources={wheelOptions}
+        displayResult={this.display.bind(this)}
+      />
+    );
+  }
+}
+
+export default Spinner;

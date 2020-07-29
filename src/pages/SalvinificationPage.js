@@ -120,7 +120,7 @@ class SalvinificationPage extends React.Component {
     this.bodyRef = React.createRef();
 
     this.state = {
-      salviniName: "DIO BOIA",
+      salviniName: "",
       bgDelay: 175,
       time: 0,
       currentDress: null,
@@ -190,7 +190,7 @@ class SalvinificationPage extends React.Component {
     // Screenshot
     html2canvas(this.screenshotRef.current).then((canvas) => {
       this.saveAs(canvas.toDataURL("image/png"), 'salvinification.png');
-      // window.location.reload();
+      window.location.reload();
     });
   }
 
@@ -248,7 +248,7 @@ class SalvinificationPage extends React.Component {
     this.salviniAlertRef.current.classList.remove("bg-danger");
   }
 
-  render(body) {
+  render() {
     return (
       <div>
         {/* <nav id="navSalvini" className="navbar navbar-expand-lg bg-primary row">
@@ -375,7 +375,6 @@ class SalvinificationPage extends React.Component {
                     <div id="ken"><img src={Naked} alt="salvini naked" /></div>
                     <div ref={this.bodyRef}><img src={this.state.dresses[this.state.currentDress]} alt="DRESS" /></div>
                   </div>
-                  {/* <Body body={this.state.dresses[this.state.currentDress]} /> */}
                 </div>
               </div>
               <div className="col-md-3 machineResult">
