@@ -10,7 +10,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import SalvinificationPage from './pages/SalvinificationPage';
-import SlotPage from './pages/SlotPage';
+// import SlotPage from './pages/SlotPage';
 
 import APLogo from '../src/assets/images/AP-square-logo.png';
 
@@ -24,7 +24,7 @@ class App extends React.Component {
         { title: 'About', path: '/about' },
         { title: 'Contact', path: '/contact' },
         { title: 'Salvinification', path: '/salvinification' },
-        { title: 'Slot', path: '/slot' },
+        // { title: 'Slot', path: '/slot' },
       ],
       home: {
         title: 'Outstrip the crowd',
@@ -66,7 +66,7 @@ class App extends React.Component {
                 <Link className="nav-link" to="/about">About</Link>
                 <Link className="nav-link" to="/contact">Contact me</Link>
                 <Link className="nav-link" to="/salvinification">Salvinification</Link>
-                <Link className="nav-link" to="/slot">TEST me</Link>
+                {/* <Link className="nav-link" to="/slot">TEST me</Link> */}
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -75,7 +75,7 @@ class App extends React.Component {
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} />} />
           <Route path="/contact" exact render={() => <ContactPage title={this.state.contact.title} />} />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} text={this.state.salvinification.text} />} />
-          <Route path="/slot" exact render={() => <SlotPage title={this.state.slot.title} />} />
+          {/* <Route path="/slot" exact render={() => <SlotPage title={this.state.slot.title} />} /> */}
 
         </Container>
         <Footer className="my-footer" fluid={true} />

@@ -127,7 +127,6 @@ class SalvinificationPage extends React.Component {
       dresses: [
         Dress0, Dress1, Dress2, Dress3, Dress4, Dress5, Dress6, Dress7, Dress8, Dress9, Dress10, Dress11, Dress12, Dress13, Dress14, Dress15, Dress16, Dress17, Dress18, Dress19, Dress20, Dress21, Dress22, Dress23, Dress24, Dress25, Dress26, Dress27, Dress28, Dress29, Dress30, Dress31, Dress32, Dress33, Dress34, Dress35, Dress36, Dress37, Dress38, Dress39, Dress40, Dress41, Dress42, Dress43, Dress44, Dress45, Dress46, Dress47, Dress48, Dress49, Dress50, Dress51, Dress52, Dress53, Dress54, Dress55, Dress56, Dress57, Dress58, Dress59, Dress60, Dress61, Dress62, Dress63, Dress64, Dress65, Dress66, Dress67, Dress68, Dress69, Dress70, Dress71, Dress72, Dress73, Dress74, Dress75, Dress76, Dress77, Dress78, Dress79, Dress80, Dress81, Dress82, Dress83, Dress84, Dress85, Dress86, Dress87, Dress88, Dress89, Dress90
       ],
-      screen: false
     }
   }
 
@@ -139,6 +138,7 @@ class SalvinificationPage extends React.Component {
     this.machine = new SlotMachine(el, { active: 0 });
     this.btn = this.randomBtnRef.current;
     this.bodyRef.current.style.display = "none";
+    // this.salviniAlertRef.current.style.display = "none";
   }
 
   onSpinClick = () => {
@@ -146,21 +146,6 @@ class SalvinificationPage extends React.Component {
     this.machine.shuffle(5, this.onComplete);
     setTimeout(() => this.machine.shuffle(5, this.onComplete), 700);
     this.closeAlert();
-  }
-
-  onComplete = (active) => {
-    this.salviniName = this.imageToName(this.machine.visibleTile);
-    this.salviniNameRef.current.innerHTML = "<div className='text-dark h4'>HAI SBLOCCATO: <p id='salviniName' className='text-danger'>" + this.salviniName + "</p></div>";
-    this.setState({currentDress: this.machine.visibleTile});
-
-    if (this.machine.visibleTile === 10) {
-      this.redBg();
-      this.time = setInterval(this.stroboBg(), this.state.bgDelay);
-    } else {
-      this.restoreBg();
-      clearInterval(this.time);
-    }
-    this.showBtnScreenshot();
   }
 
   showMachine = () => {
@@ -172,18 +157,31 @@ class SalvinificationPage extends React.Component {
       $("#ken").css("display", "none");
     }
   }
-  /**************        NOTA_GIO: FINO A QUI HO MODIFICATO IL CODICE            ***************/
 
-  closeAlert = () => {
-    if (this.alertRef.current.style.display !== "none") {
-      this.alertRef.current.style.display = "none";
+  onComplete = (active) => {
+    this.salviniName = this.imageToName(this.machine.visibleTile);
+    this.salviniNameRef.current.innerHTML = "<div className='text-dark h4'>HAI SBLOCCATO: <p id='salviniName' className='text-danger'>" + this.salviniName + "</p></div>";
+    this.setState({currentDress: this.machine.visibleTile}); 
+    
+    
+
+    if (this.machine.visibleTile === 10) {
+      this.redBg();
+      const time = setInterval(() => {
+        this.stroboBg()
+      }, this.state.bgDelay); 
+      setTimeout(() => {
+        clearInterval(time);
+      }, 5000);
+    } else {
+      this.restoreBg();
     }
+    this.showBtnScreenshot();
   }
 
   screenshot = () => {
     var divToRemove = this.machineRef.current;
     divToRemove.parentNode.removeChild(divToRemove);
-
     this.setBody();
     this.bodyRef.current.style.display = "block";
 
@@ -192,6 +190,12 @@ class SalvinificationPage extends React.Component {
       this.saveAs(canvas.toDataURL("image/png"), 'salvinification.png');
       window.location.reload();
     });
+  }
+
+  setBody = () => {
+    this.bodyToScreenRef.current.style.top = "-160px";
+    this.bodyToScreenRef.current.style.left = "120px";
+    this.bodyToScreenRef.current.style.width = "75%";
   }
 
   saveAs = (url, salvinification) => {
@@ -208,14 +212,14 @@ class SalvinificationPage extends React.Component {
     }
   }
 
-  setBody = () => {
-    this.bodyToScreenRef.current.style.top = "-160px";
-    this.bodyToScreenRef.current.style.left = "120px";
-    this.bodyToScreenRef.current.style.width = "75%";
+  showAlert = () => {
+    this.alertRef.current.style.display = 'block';
   }
 
-  showAlert = () => {
-    this.salviniAlertRef.current.style.display = 'block';
+  closeAlert = () => {
+    if (this.alertRef.current.style.display !== "none") {
+      this.alertRef.current.style.display = "none";
+    }
   }
 
   showBtnScreenshot = () => {
@@ -232,32 +236,27 @@ class SalvinificationPage extends React.Component {
   }
 
   redBg = () => {
-    this.randomizeRef.current.classList.add("bg-danger");
-    this.randomizeRef.current.classList.remove("bg-secondary");
+    this.randomizeRef.current.classList.toggle("bg-danger");
+
+    // this.randomizeRef.current.classList.toggle("bg-danger");
+    // this.randomizeRef.current.classList.toggle("bg-secondary");
 
     this.showAlert();
-    this.salviniAlertRef.current.classList.add("bg-danger");
-    this.salviniAlertRef.current.classList.remove("bg-secondary");
+    this.salviniAlertRef.current.classList.toggle("bg-danger");
+    // this.salviniAlertRef.current.classList.toggle("bg-secondary");
+    console.log("CACCHIOOOOOO");
   }
 
   restoreBg = () => {
-    this.randomizeRef.current.classList.add("bg-secondary");
-    this.randomizeRef.current.classList.remove("bg-danger");
-
-    this.salviniAlertRef.current.classList.add("bg-secondary");
-    this.salviniAlertRef.current.classList.remove("bg-danger");
+    if (!this.randomizeRef.current.classList.contains("bg-secondary") && !this.salviniAlertRef.current.classList.contains("bg-secondary")) {
+      this.randomizeRef.current.classList.toggle("bg-secondary");
+      this.salviniAlertRef.current.classList.toggle("bg-secondary");
+    }
   }
 
   render() {
     return (
       <div>
-        {/* <nav id="navSalvini" className="navbar navbar-expand-lg bg-primary row">
-          <div id="txtSalvinification" className="navbar-brand text-light col-md-6 mr-4">SALVINIfication
-        <p id="subtxtSalvinification" className="h5 text-warning">L'abito non fa il MONACO, ma il MINISTRO DEGLI INTERNI.</p>
-          </div>
-          <div id="txtNav" className="h2 text-light col-md-5 offset-md-1">Gira la ruota e scopri quale divisa indosserà oggi il ministro SALVINI per "salvare" il paese.</div>
-        </nav> */}
-
         <div id="italianFlag" className="row">
           <div className="col-md-4 bg-success"></div>
           <div className="col-md-4 bg-light"></div>
@@ -268,7 +267,7 @@ class SalvinificationPage extends React.Component {
 
         <div ref={this.salviniAlertRef} id="salviniAlert" className="row bg-secondary">
           <div className="col-md-12">
-            <div ref={this.alertRef} id="myAlert" className="mt-4 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.closeAlert} id="btnClose">&times;</button></div>
+            <div ref={this.alertRef} id="myAlert" className="m-5 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.closeAlert} id="btnClose">&times;</button></div>
           </div>
         </div>
         
@@ -292,7 +291,7 @@ class SalvinificationPage extends React.Component {
                       <div><img src={Dress9} alt="salvini dress 9" /></div>
                       <div><img src={Dress10} alt="salvini dress 10" /></div>
                       <div><img src={Dress11} alt="salvini dress 11" /></div>
-                      <div><img src={Dress12} alt="salvini dress 12" /></div>
+                      {/* <div><img src={Dress12} alt="salvini dress 12" /></div>
                       <div><img src={Dress13} alt="salvini dress 13" /></div>
                       <div><img src={Dress14} alt="salvini dress 14" /></div>
                       <div><img src={Dress15} alt="salvini dress 15" /></div>
@@ -370,7 +369,7 @@ class SalvinificationPage extends React.Component {
                       <div><img src={Dress87} alt="salvini dress 87" /></div>
                       <div><img src={Dress88} alt="salvini dress 88" /></div>
                       <div><img src={Dress89} alt="salvini dress 89" /></div>
-                      <div><img src={Dress90} alt="salvini dress 90" /></div>
+                      <div><img src={Dress90} alt="salvini dress 90" /></div> */}
                     </div>
                     <div id="ken"><img src={Naked} alt="salvini naked" /></div>
                     <div ref={this.bodyRef}><img src={this.state.dresses[this.state.currentDress]} alt="DRESS" /></div>
@@ -443,244 +442,244 @@ class SalvinificationPage extends React.Component {
       case 11:
         name = "AstroSalvini";
         break;
-      case 12:
-        name = "Salvini texas ranger";
-        break;
-      case 13:
-        name = "Sal-vigile";
-        break;
-      case 14:
-        name = "Obi Wan Salvobi";
-        break;
-      case 15:
-        name = "Salvininja";
-        break;
-      case 16:
-        name = "Mr. Salvastic";
-        break;
-      case 17:
-        name = "Salvini pompiere";
-        break;
-      case 18:
-        name = "Fra' Salvini";
-        break;
-      case 19:
-        name = "Salvini MigrantBuster";
-        break;
-      case 20:
-        name = "RoboSalvini";
-        break;
-      case 21:
-        name = "Salvini Garibaldino";
-        break;
-      case 22:
-        name = "Salvinion";
-        break;
-      case 23:
-        name = "Power Salving";
-        break;
-      case 24:
-        name = "Salvini centurione";
-        break;
-      case 25:
-        name = "Sailor-Ministro";
-        break;
-      case 26:
-        name = "Super Salvyan";
-        break;
-      case 27:
-        name = "Salvini globe trotter";
-        break;
-      case 28:
-        name = "Salvinella";
-        break;
-      case 29:
-        name = "Salvini baywatch";
-        break;
-      case 30:
-        name = "Kobra Kai Salvini";
-        break;
-      case 31:
-        name = "Scottish Salvini";
-        break;
-      case 32:
-        name = "Royal Salvini";
-        break;
-      case 33:
-        name = "Salvini Mr.Bean";
-        break;
-      case 34:
-        name = "Scoutvini";
-        break;
-      case 35:
-        name = "Salvini amazone";
-        break;
-      case 36:
-        name = "Salvini He-Man";
-        break;
-      case 37:
-        name = "Buzz Salvaightyear";
-        break;
-      case 38:
-        name = "Salvini Austin Powers";
-        break;
-      case 39:
-        name = "SSalvini";
-        break;
-      case 40:
-        name = "Salvini Balotelli";
-        break;
-      case 41:
-        name = "Salvini Ladro";
-        break;
-      case 42:
-        name = "Shaolvini";
-        break;
-      case 43:
-        name = "Iron Salvini";
-        break;
-      case 44:
-        name = "Salvini CRI";
-        break;
-      case 45:
-        name = "Soviet Salvini";
-        break;
-      case 46:
-        name = "Cardinal Salvini";
-        break;
-      case 47:
-        name = "Moschettier Salvini";
-        break;
-      case 48:
-        name = "Salvy Potter";
-        break;
-      case 49:
-        name = "Salvini Adrian";
-        break;
-      case 50:
-        name = "Salvini torero";
-        break;
-      case 51:
-        name = "Sambini";
-        break;
-      case 52:
-        name = "Salvini teletubbie";
-        break;
-      case 53:
-        name = "Sheldini";
-        break;
-      case 54:
-        name = "Salvaddin";
-        break;
-      case 55:
-        name = "Sulk";
-        break;
-      case 56:
-        name = "Salvini Uzumaki";
-        break;
-      case 57:
-        name = "Wolverini";
-        break;
-      case 58:
-        name = "Salvitama";
-        break;
-      case 59:
-        name = "Sandalf";
-        break;
-      case 60:
-        name = "Salvigolas";
-        break;
-      case 61:
-        name = "Cetriolo Salvini";
-        break;
-      case 62:
-        name = "Salvini aggiustatutto";
-        break;
-      case 63:
-        name = "Rick Salvchez";
-        break;
-      case 64:
-        name = "Salvini Auditore";
-        break;
-      case 65:
-        name = "Papa Salvesco";
-        break;
-      case 66:
-        name = "Regina Elisalvetta";
-        break;
-      case 67:
-        name = "Salvini cappello di paglia";
-        break;
-      case 68:
-        name = "Buddhini";
-        break;
-      case 69:
-        name = "Salvini Bonaparte";
-        break;
-      case 70:
-        name = "Salzinga";
-        break;
-      case 71:
-        name = "Salvini Morpheus";
-        break;
-      case 72:
-        name = "Gargalvini";
-        break;
-      case 73:
-        name = "Salvini Attila";
-        break;
-      case 74:
-        name = "Spider-salv";
-        break;
-      case 75:
-        name = "Super Salvini";
-        break;
-      case 76:
-        name = "Salvini Zenigata";
-        break;
-      case 77:
-        name = "Banda Salvotti";
-        break;
-      case 78:
-        name = "Salvini Team Rocket";
-        break;
-      case 79:
-        name = "Salvini Kill-Bill";
-        break;
-      case 80:
-        name = "Salvini style!";
-        break;
-      case 81:
-        name = "Salvini Maui";
-        break;
-      case 82:
-        name = "Salvv Branningan";
-        break;
-      case 83:
-        name = "Salvini il barbaro";
-        break;
-      case 84:
-        name = "Salvini Dio della guerra";
-        break;
-      case 85:
-        name = "Salvini ebbasta";
-        break;
-      case 86:
-        name = "BIG SALVO";
-        break;
-      case 87:
-        name = "Savlini Borat";
-        break;
-      case 88:
-        name = "Salvin Presley";
-        break;
-      case 89:
-        name = "Salvini Hutton";
-        break;
-      case 90:
-      case -1:
-        name = "Ronald Mc'Salvin";
-        break;
+      // case 12:
+      //   name = "Salvini texas ranger";
+      //   break;
+      // case 13:
+      //   name = "Sal-vigile";
+      //   break;
+      // case 14:
+      //   name = "Obi Wan Salvobi";
+      //   break;
+      // case 15:
+      //   name = "Salvininja";
+      //   break;
+      // case 16:
+      //   name = "Mr. Salvastic";
+      //   break;
+      // case 17:
+      //   name = "Salvini pompiere";
+      //   break;
+      // case 18:
+      //   name = "Fra' Salvini";
+      //   break;
+      // case 19:
+      //   name = "Salvini MigrantBuster";
+      //   break;
+      // case 20:
+      //   name = "RoboSalvini";
+      //   break;
+      // case 21:
+      //   name = "Salvini Garibaldino";
+      //   break;
+      // case 22:
+      //   name = "Salvinion";
+      //   break;
+      // case 23:
+      //   name = "Power Salving";
+      //   break;
+      // case 24:
+      //   name = "Salvini centurione";
+      //   break;
+      // case 25:
+      //   name = "Sailor-Ministro";
+      //   break;
+      // case 26:
+      //   name = "Super Salvyan";
+      //   break;
+      // case 27:
+      //   name = "Salvini globe trotter";
+      //   break;
+      // case 28:
+      //   name = "Salvinella";
+      //   break;
+      // case 29:
+      //   name = "Salvini baywatch";
+      //   break;
+      // case 30:
+      //   name = "Kobra Kai Salvini";
+      //   break;
+      // case 31:
+      //   name = "Scottish Salvini";
+      //   break;
+      // case 32:
+      //   name = "Royal Salvini";
+      //   break;
+      // case 33:
+      //   name = "Salvini Mr.Bean";
+      //   break;
+      // case 34:
+      //   name = "Scoutvini";
+      //   break;
+      // case 35:
+      //   name = "Salvini amazone";
+      //   break;
+      // case 36:
+      //   name = "Salvini He-Man";
+      //   break;
+      // case 37:
+      //   name = "Buzz Salvaightyear";
+      //   break;
+      // case 38:
+      //   name = "Salvini Austin Powers";
+      //   break;
+      // case 39:
+      //   name = "SSalvini";
+      //   break;
+      // case 40:
+      //   name = "Salvini Balotelli";
+      //   break;
+      // case 41:
+      //   name = "Salvini Ladro";
+      //   break;
+      // case 42:
+      //   name = "Shaolvini";
+      //   break;
+      // case 43:
+      //   name = "Iron Salvini";
+      //   break;
+      // case 44:
+      //   name = "Salvini CRI";
+      //   break;
+      // case 45:
+      //   name = "Soviet Salvini";
+      //   break;
+      // case 46:
+      //   name = "Cardinal Salvini";
+      //   break;
+      // case 47:
+      //   name = "Moschettier Salvini";
+      //   break;
+      // case 48:
+      //   name = "Salvy Potter";
+      //   break;
+      // case 49:
+      //   name = "Salvini Adrian";
+      //   break;
+      // case 50:
+      //   name = "Salvini torero";
+      //   break;
+      // case 51:
+      //   name = "Sambini";
+      //   break;
+      // case 52:
+      //   name = "Salvini teletubbie";
+      //   break;
+      // case 53:
+      //   name = "Sheldini";
+      //   break;
+      // case 54:
+      //   name = "Salvaddin";
+      //   break;
+      // case 55:
+      //   name = "Sulk";
+      //   break;
+      // case 56:
+      //   name = "Salvini Uzumaki";
+      //   break;
+      // case 57:
+      //   name = "Wolverini";
+      //   break;
+      // case 58:
+      //   name = "Salvitama";
+      //   break;
+      // case 59:
+      //   name = "Sandalf";
+      //   break;
+      // case 60:
+      //   name = "Salvigolas";
+      //   break;
+      // case 61:
+      //   name = "Cetriolo Salvini";
+      //   break;
+      // case 62:
+      //   name = "Salvini aggiustatutto";
+      //   break;
+      // case 63:
+      //   name = "Rick Salvchez";
+      //   break;
+      // case 64:
+      //   name = "Salvini Auditore";
+      //   break;
+      // case 65:
+      //   name = "Papa Salvesco";
+      //   break;
+      // case 66:
+      //   name = "Regina Elisalvetta";
+      //   break;
+      // case 67:
+      //   name = "Salvini cappello di paglia";
+      //   break;
+      // case 68:
+      //   name = "Buddhini";
+      //   break;
+      // case 69:
+      //   name = "Salvini Bonaparte";
+      //   break;
+      // case 70:
+      //   name = "Salzinga";
+      //   break;
+      // case 71:
+      //   name = "Salvini Morpheus";
+      //   break;
+      // case 72:
+      //   name = "Gargalvini";
+      //   break;
+      // case 73:
+      //   name = "Salvini Attila";
+      //   break;
+      // case 74:
+      //   name = "Spider-salv";
+      //   break;
+      // case 75:
+      //   name = "Super Salvini";
+      //   break;
+      // case 76:
+      //   name = "Salvini Zenigata";
+      //   break;
+      // case 77:
+      //   name = "Banda Salvotti";
+      //   break;
+      // case 78:
+      //   name = "Salvini Team Rocket";
+      //   break;
+      // case 79:
+      //   name = "Salvini Kill-Bill";
+      //   break;
+      // case 80:
+      //   name = "Salvini style!";
+      //   break;
+      // case 81:
+      //   name = "Salvini Maui";
+      //   break;
+      // case 82:
+      //   name = "Salvv Branningan";
+      //   break;
+      // case 83:
+      //   name = "Salvini il barbaro";
+      //   break;
+      // case 84:
+      //   name = "Salvini Dio della guerra";
+      //   break;
+      // case 85:
+      //   name = "Salvini ebbasta";
+      //   break;
+      // case 86:
+      //   name = "BIG SALVO";
+      //   break;
+      // case 87:
+      //   name = "Savlini Borat";
+      //   break;
+      // case 88:
+      //   name = "Salvin Presley";
+      //   break;
+      // case 89:
+      //   name = "Salvini Hutton";
+      //   break;
+      // case 90:
+      // case -1:
+      //   name = "Ronald Mc'Salvin";
+      //   break;
       default:
         name = "&nbsp;";
     }
