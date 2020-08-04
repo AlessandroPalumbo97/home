@@ -113,6 +113,7 @@ class SalvinificationPage extends React.Component {
     this.alertRef = React.createRef();
     this.salviniAlertRef = React.createRef();
     this.randomBtnRef = React.createRef();
+    this.saveBtnRef = React.createRef();
     this.salviniNameRef = React.createRef();
     this.screenshotRef = React.createRef();
     this.randomizeRef = React.createRef();
@@ -121,12 +122,13 @@ class SalvinificationPage extends React.Component {
 
     this.state = {
       salviniName: "",
-      bgDelay: 175,
+      bgDelay: 200,
       time: 0,
       currentDress: null,
       dresses: [
         Dress0, Dress1, Dress2, Dress3, Dress4, Dress5, Dress6, Dress7, Dress8, Dress9, Dress10, Dress11, Dress12, Dress13, Dress14, Dress15, Dress16, Dress17, Dress18, Dress19, Dress20, Dress21, Dress22, Dress23, Dress24, Dress25, Dress26, Dress27, Dress28, Dress29, Dress30, Dress31, Dress32, Dress33, Dress34, Dress35, Dress36, Dress37, Dress38, Dress39, Dress40, Dress41, Dress42, Dress43, Dress44, Dress45, Dress46, Dress47, Dress48, Dress49, Dress50, Dress51, Dress52, Dress53, Dress54, Dress55, Dress56, Dress57, Dress58, Dress59, Dress60, Dress61, Dress62, Dress63, Dress64, Dress65, Dress66, Dress67, Dress68, Dress69, Dress70, Dress71, Dress72, Dress73, Dress74, Dress75, Dress76, Dress77, Dress78, Dress79, Dress80, Dress81, Dress82, Dress83, Dress84, Dress85, Dress86, Dress87, Dress88, Dress89, Dress90
       ],
+      disableSpin: false
     }
   }
 
@@ -138,14 +140,13 @@ class SalvinificationPage extends React.Component {
     this.machine = new SlotMachine(el, { active: 0 });
     this.btn = this.randomBtnRef.current;
     this.bodyRef.current.style.display = "none";
-    // this.salviniAlertRef.current.style.display = "none";
+    this.alertRef.current.style.display = "none";
   }
 
   onSpinClick = () => {
     this.showMachine();
-    this.machine.shuffle(5, this.onComplete);
-    setTimeout(() => this.machine.shuffle(5, this.onComplete), 700);
-    this.closeAlert();
+    this.machine.shuffle(1, this.onComplete);
+    // setTimeout(() => this.machine.shuffle(1, this.onComplete), 700);
   }
 
   showMachine = () => {
@@ -163,26 +164,33 @@ class SalvinificationPage extends React.Component {
     this.salviniNameRef.current.innerHTML = "<div className='text-dark h4'>HAI SBLOCCATO: <p id='salviniName' className='text-danger'>" + this.salviniName + "</p></div>";
     this.setState({currentDress: this.machine.visibleTile}); 
     
-    
-
     if (this.machine.visibleTile === 10) {
+      this.setState({disableSpin: true});
       this.redBg();
+      this.toggleAlert();
+      
       const time = setInterval(() => {
         this.stroboBg()
       }, this.state.bgDelay); 
       setTimeout(() => {
         clearInterval(time);
-      }, 5000);
-    } else {
+        this.restoreBg();
+        this.redBg();
+      }, 3500);
+    }
+    else {
       this.restoreBg();
     }
+
     this.showBtnScreenshot();
   }
 
   screenshot = () => {
     var divToRemove = this.machineRef.current;
     divToRemove.parentNode.removeChild(divToRemove);
-    this.setBody();
+    this.bodyToScreenRef.current.style.top = "-160px";
+    this.bodyToScreenRef.current.style.left = "120px";
+    this.bodyToScreenRef.current.style.width = "75%";
     this.bodyRef.current.style.display = "block";
 
     // Screenshot
@@ -190,12 +198,6 @@ class SalvinificationPage extends React.Component {
       this.saveAs(canvas.toDataURL("image/png"), 'salvinification.png');
       window.location.reload();
     });
-  }
-
-  setBody = () => {
-    this.bodyToScreenRef.current.style.top = "-160px";
-    this.bodyToScreenRef.current.style.left = "120px";
-    this.bodyToScreenRef.current.style.width = "75%";
   }
 
   saveAs = (url, salvinification) => {
@@ -212,46 +214,36 @@ class SalvinificationPage extends React.Component {
     }
   }
 
-  showAlert = () => {
-    this.alertRef.current.style.display = 'block';
-  }
-
-  closeAlert = () => {
-    if (this.alertRef.current.style.display !== "none") {
+  toggleAlert = () => {
+    if (this.alertRef.current.style.display === "block") {
       this.alertRef.current.style.display = "none";
+      this.setState({disableSpin: false});
+    }
+    else {
+      this.alertRef.current.style.display = 'block';
     }
   }
 
   showBtnScreenshot = () => {
-    var btnScreenshot = document.getElementById("btnScreenshot");
-    if (btnScreenshot != null) {
+    const btnScreenshot = this.saveBtnRef.current;
+    if (btnScreenshot !== null) {
       btnScreenshot.style.display = "block";
     }
   }
 
-  stroboBg = () => {
-    this.randomizeRef.current.classList.toggle("bg-danger");
-    this.salviniAlertRef.current.classList.toggle("bg-danger");
-    console.log("tempoo");
+  redBg = () => {
+    this.randomizeRef.current.classList.add("bg-danger");
+    this.salviniAlertRef.current.classList.add("bg-danger");
   }
 
-  redBg = () => {
-    this.randomizeRef.current.classList.toggle("bg-danger");
-
-    // this.randomizeRef.current.classList.toggle("bg-danger");
-    // this.randomizeRef.current.classList.toggle("bg-secondary");
-
-    this.showAlert();
-    this.salviniAlertRef.current.classList.toggle("bg-danger");
-    // this.salviniAlertRef.current.classList.toggle("bg-secondary");
-    console.log("CACCHIOOOOOO");
+  stroboBg = () => {
+    this.randomizeRef.current.classList.toggle("bg-white");
+    this.salviniAlertRef.current.classList.toggle("bg-white");
   }
 
   restoreBg = () => {
-    if (!this.randomizeRef.current.classList.contains("bg-secondary") && !this.salviniAlertRef.current.classList.contains("bg-secondary")) {
-      this.randomizeRef.current.classList.toggle("bg-secondary");
-      this.salviniAlertRef.current.classList.toggle("bg-secondary");
-    }
+    this.randomizeRef.current.classList.remove("bg-danger");
+    this.salviniAlertRef.current.classList.remove("bg-danger");
   }
 
   render() {
@@ -265,13 +257,13 @@ class SalvinificationPage extends React.Component {
 
         <Hero title={this.props.title} subTitle={this.props.subTitle} text={this.props.text} />
 
-        <div ref={this.salviniAlertRef} id="salviniAlert" className="row bg-secondary">
+        <div ref={this.salviniAlertRef} id="salviniAlert" className="row bg-white">
           <div className="col-md-12">
-            <div ref={this.alertRef} id="myAlert" className="m-5 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.closeAlert} id="btnClose">&times;</button></div>
+            <div ref={this.alertRef} id="myAlert" className="m-5 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.toggleAlert} id="btnClose">&times;</button></div>
           </div>
         </div>
         
-        <div ref={this.randomizeRef} id="randomize" className="bg-secondary">
+        <div ref={this.randomizeRef} id="randomize" className="bg-white">
           <div className="container">
             <div className="row">
               <div className="col-md-6 offset-md-3">
@@ -379,8 +371,8 @@ class SalvinificationPage extends React.Component {
               <div className="col-md-3 machineResult">
                 <p ref={this.salviniNameRef} id="machine2Result"> </p>
                 <div className="">
-                  <button ref={this.randomBtnRef} id="randomizeButton" className="btn btn-danger btn-circle" type="button" onClick={this.onSpinClick}>Spin!</button>
-                  <button id="btnScreenshot" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
+                  <button ref={this.randomBtnRef} id="randomizeButton" className="btn btn-danger btn-circle shadow-lg" type="button" onClick={this.onSpinClick} disabled={this.state.disableSpin}>Spin!</button>
+                  <button ref={this.saveBtnRef} id="btnScreenshot" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
                   <div className="fb-share-button" data-href="https://www.salvinification.it" data-layout="button" data-size="large" data-mobile-iframe="true">
                     <button type="button" className="btn btn-primary text-center" id="btnShare">
                       <img src="img/fbicon.png" alt="facebook icon" id="fbicon" />
@@ -393,12 +385,6 @@ class SalvinificationPage extends React.Component {
             </div>
           </div>
         </div>
-
-        {/* <script src={$}></script> */}
-        {/* <script src={usePopper}></script> */}
-        {/* <script src="js/html2canvas.js"></script> */}
-        {/* <script src="dist/slotmachine.min.js"></script> */}
-        {/* <script src={SlotMachine}></script> */}
       </div>
     );
   }
