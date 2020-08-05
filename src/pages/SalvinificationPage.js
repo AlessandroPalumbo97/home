@@ -1,4 +1,12 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import $ from "jquery";
+import html2canvas from 'html2canvas';
+
+import SlotMachine from 'jquery-slotmachine/lib/slot-machine.js';
 
 import Hero from '../components/Hero';
 
@@ -97,26 +105,19 @@ import Dress89 from '../assets/salvinification/89.png';
 import Dress90 from '../assets/salvinification/90.png';
 import Naked from '../assets/salvinification/Ken.png';
 
-// Scripts
-import $ from "jquery";
-// import { usePopper } from 'react-popper';
-import SlotMachine from 'jquery-slotmachine/lib/slot-machine.js';
-// import slotmachine from 'slot-machine/src/index'
-import html2canvas from 'html2canvas';
-
 class SalvinificationPage extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     this.machineRef = React.createRef();
     this.alertRef = React.createRef();
-    this.salviniAlertRef = React.createRef();
+    this.alertWrapperRef = React.createRef();
     this.randomBtnRef = React.createRef();
     this.saveBtnRef = React.createRef();
     this.salviniNameRef = React.createRef();
     this.screenshotRef = React.createRef();
-    this.randomizeRef = React.createRef();
+    this.mainWrapperRef = React.createRef();
     this.bodyToScreenRef = React.createRef();
     this.bodyRef = React.createRef();
 
@@ -133,9 +134,6 @@ class SalvinificationPage extends React.Component {
   }
 
   componentDidMount() {
-    // const results = {
-    //   machine: document.querySelector('#machine2Result')
-    // };
     const el = this.machineRef.current;
     this.machine = new SlotMachine(el, { active: 0 });
     this.btn = this.randomBtnRef.current;
@@ -146,7 +144,6 @@ class SalvinificationPage extends React.Component {
   onSpinClick = () => {
     this.showMachine();
     this.machine.shuffle(1, this.onComplete);
-    // setTimeout(() => this.machine.shuffle(1, this.onComplete), 700);
   }
 
   showMachine = () => {
@@ -162,16 +159,16 @@ class SalvinificationPage extends React.Component {
   onComplete = (active) => {
     this.salviniName = this.imageToName(this.machine.visibleTile);
     this.salviniNameRef.current.innerHTML = "<div className='text-dark h4'>HAI SBLOCCATO: <p id='salviniName' className='text-danger'>" + this.salviniName + "</p></div>";
-    this.setState({currentDress: this.machine.visibleTile}); 
-    
+    this.setState({ currentDress: this.machine.visibleTile });
+
     if (this.machine.visibleTile === 10) {
-      this.setState({disableSpin: true});
+      this.setState({ disableSpin: true });
       this.redBg();
       this.toggleAlert();
-      
+
       const time = setInterval(() => {
         this.stroboBg()
-      }, this.state.bgDelay); 
+      }, this.state.bgDelay);
       setTimeout(() => {
         clearInterval(time);
         this.restoreBg();
@@ -188,9 +185,6 @@ class SalvinificationPage extends React.Component {
   screenshot = () => {
     var divToRemove = this.machineRef.current;
     divToRemove.parentNode.removeChild(divToRemove);
-    this.bodyToScreenRef.current.style.top = "-160px";
-    this.bodyToScreenRef.current.style.left = "120px";
-    this.bodyToScreenRef.current.style.width = "75%";
     this.bodyRef.current.style.display = "block";
 
     // Screenshot
@@ -215,12 +209,12 @@ class SalvinificationPage extends React.Component {
   }
 
   toggleAlert = () => {
-    if (this.alertRef.current.style.display === "block") {
+    if (this.alertRef.current.style.display === "inline-block") {
       this.alertRef.current.style.display = "none";
-      this.setState({disableSpin: false});
+      this.setState({ disableSpin: false });
     }
     else {
-      this.alertRef.current.style.display = 'block';
+      this.alertRef.current.style.display = 'inline-block';
     }
   }
 
@@ -232,58 +226,61 @@ class SalvinificationPage extends React.Component {
   }
 
   redBg = () => {
-    this.randomizeRef.current.classList.add("bg-danger");
-    this.salviniAlertRef.current.classList.add("bg-danger");
+    this.mainWrapperRef.current.classList.add("bg-danger");
+    this.alertWrapperRef.current.classList.add("bg-danger");
   }
 
   stroboBg = () => {
-    this.randomizeRef.current.classList.toggle("bg-white");
-    this.salviniAlertRef.current.classList.toggle("bg-white");
+    this.mainWrapperRef.current.classList.toggle("bg-white");
+    this.alertWrapperRef.current.classList.toggle("bg-white");
   }
 
   restoreBg = () => {
-    this.randomizeRef.current.classList.remove("bg-danger");
-    this.salviniAlertRef.current.classList.remove("bg-danger");
+    this.mainWrapperRef.current.classList.remove("bg-danger");
+    this.alertWrapperRef.current.classList.remove("bg-danger");
   }
 
   render() {
     return (
-      <div>
-        <div id="italianFlag" className="row">
-          <div className="col-md-4 bg-success"></div>
-          <div className="col-md-4 bg-light"></div>
-          <div className="col-md-4 bg-danger"></div>
-        </div>
+      <Container fluid={true}>
+        <Row className="mt-0">
+          <Col className="bg-success" md={4} sm={12}></Col>
+          <Col className="bg-light" md={4} sm={12}></Col>
+          <Col className="bg-danger" md={4} sm={12}></Col>
+          <p></p>
+        </Row>
 
         <Hero title={this.props.title} subTitle={this.props.subTitle} text={this.props.text} />
 
-        <div ref={this.salviniAlertRef} id="salviniAlert" className="row bg-white">
-          <div className="col-md-12">
-            <div ref={this.alertRef} id="myAlert" className="m-5 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.toggleAlert} id="btnClose">&times;</button></div>
-          </div>
-        </div>
-        
-        <div ref={this.randomizeRef} id="randomize" className="bg-white">
+        <Row ref={this.alertWrapperRef} className="bg-white">
+          <Col md={3} sm={0}></Col>
+          <Col md={6} sm={12}>
+            <div ref={this.alertRef} id="myAlert" className="mw-75 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.toggleAlert} id="btnClose">&times;</button></div>
+          </Col>
+          <Col md={3} sm={0}></Col>
+        </Row>
+
+        <Row ref={this.mainWrapperRef} id="randomize" className="bg-white">
           <div className="container">
-            <div className="row">
-              <div className="col-md-6 offset-md-3">
+            <Row>
+              <Col md={3} sm={0}></Col>
+              <Col md={6} sm={6}>
                 <div ref={this.screenshotRef} id="toScreenshot">
                   <img className="mt-4 salvini" src={SalviniFace} alt="Salvini's face" />
-                  <div ref={this.bodyToScreenRef} id="bodyToScreen">
-                    <div ref={this.machineRef} id="machine" className="randomizeMachine dress" md={4} sm={12}>
-                      <div><img src={Dress0} alt="salvini dress 0" /></div>
-                      <div><img src={Dress1} alt="salvini dress 1" /></div>
-                      <div><img src={Dress2} alt="salvini dress 3" /></div>
-                      <div><img src={Dress3} alt="salvini dress 2" /></div>
-                      <div><img src={Dress4} alt="salvini dress 4" /></div>
-                      <div><img src={Dress5} alt="salvini dress 5" /></div>
-                      <div><img src={Dress6} alt="salvini dress 6" /></div>
-                      <div><img src={Dress7} alt="salvini dress 7" /></div>
-                      <div><img src={Dress8} alt="salvini dress 8" /></div>
-                      <div><img src={Dress9} alt="salvini dress 9" /></div>
-                      <div><img src={Dress10} alt="salvini dress 10" /></div>
-                      <div><img src={Dress11} alt="salvini dress 11" /></div>
-                      {/* <div><img src={Dress12} alt="salvini dress 12" /></div>
+                  <div ref={this.machineRef} id="machine" className="randomizeMachine mx-auto p-0" md={4} sm={12}>
+                    <div><img src={Dress0} alt="salvini dress 0" /></div>
+                    <div><img src={Dress1} alt="salvini dress 1" /></div>
+                    <div><img src={Dress2} alt="salvini dress 3" /></div>
+                    <div><img src={Dress3} alt="salvini dress 2" /></div>
+                    <div><img src={Dress4} alt="salvini dress 4" /></div>
+                    <div><img src={Dress5} alt="salvini dress 5" /></div>
+                    <div><img src={Dress6} alt="salvini dress 6" /></div>
+                    <div><img src={Dress7} alt="salvini dress 7" /></div>
+                    <div><img src={Dress8} alt="salvini dress 8" /></div>
+                    <div><img src={Dress9} alt="salvini dress 9" /></div>
+                    <div><img src={Dress10} alt="salvini dress 10" /></div>
+                    <div><img src={Dress11} alt="salvini dress 11" /></div>
+                    {/* <div><img src={Dress12} alt="salvini dress 12" /></div>
                       <div><img src={Dress13} alt="salvini dress 13" /></div>
                       <div><img src={Dress14} alt="salvini dress 14" /></div>
                       <div><img src={Dress15} alt="salvini dress 15" /></div>
@@ -362,13 +359,12 @@ class SalvinificationPage extends React.Component {
                       <div><img src={Dress88} alt="salvini dress 88" /></div>
                       <div><img src={Dress89} alt="salvini dress 89" /></div>
                       <div><img src={Dress90} alt="salvini dress 90" /></div> */}
-                    </div>
-                    <div id="ken"><img src={Naked} alt="salvini naked" /></div>
-                    <div ref={this.bodyRef}><img src={this.state.dresses[this.state.currentDress]} alt="DRESS" /></div>
                   </div>
+                  <div id="ken" className=""><img src={Naked} alt="salvini naked" /></div>
+                  <div ref={this.bodyRef}><img src={this.state.dresses[this.state.currentDress]} alt="DRESS" /></div>
                 </div>
-              </div>
-              <div className="col-md-3 machineResult">
+              </Col>
+              <Col className="machineResult" md={3} sm={6}>
                 <p ref={this.salviniNameRef} id="machine2Result"> </p>
                 <div className="">
                   <button ref={this.randomBtnRef} id="randomizeButton" className="btn btn-danger btn-circle shadow-lg" type="button" onClick={this.onSpinClick} disabled={this.state.disableSpin}>Spin!</button>
@@ -381,11 +377,11 @@ class SalvinificationPage extends React.Component {
                   </div>
                   <a id="btnTweet" className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Gira%20la%20ruota%20e%20scopri%20quale%20divisa%20indosserà%20ogg%20il%20ministro%20Salvini%20per%20salvare%20il%20paese%20" data-size="large">Tweet</a>
                 </div>
-              </div>
-            </div>
+              </Col>
+            </Row>
           </div>
-        </div>
-      </div>
+        </Row>
+      </Container>
     );
   }
 
@@ -672,6 +668,6 @@ class SalvinificationPage extends React.Component {
     return name;
   }
 }
- 
+
 export default SalvinificationPage;
 

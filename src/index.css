@@ -116,8 +116,8 @@ img {
 }
 
 .randomizeMachine {
-	width: 500px;
-	height: 820px;
+	width: 20vh;
+	height: 60vh;
 }
 
 .salvini {
@@ -215,13 +215,13 @@ img {
 	min-height: 15px;
 }
 
-#ken {
+/* #ken {
 	display: block;
 	position: relative;
 	top: -130px;
 	left: 120px;
 	width: 75%;
-}
+} */
 
 #machine {
 	opacity: 0;
@@ -348,8 +348,8 @@ XS Device| 320x568*/
 	}
 
 	.randomizeMachine {
-		width: 250px;
-		height: 400px;
+		width: 20vh;
+		height: 60vh;
 	}
 
 	.row {
@@ -381,10 +381,10 @@ XS Device| 320x568*/
 		font-size: 15px;
 	}
 
-	#ken {
+	/* #ken {
 			top: -75px;
 			left: 10px;
-	}
+	} */
 
 	#randomizeButton {
 		border-radius: 50%;
@@ -505,10 +505,10 @@ GALAXY S5 | 360x640*/
 		font-size: 15px;
 	}
 
-	#ken {
+	/* #ken {
     top: -75px;
     left: 10px;
-	}
+	} */
 
 	#randomizeButton {
     border-radius: 50%;
@@ -629,10 +629,10 @@ Pixel 2 XL | 411x823*/
 		font-size: 15px;
 	}
 
-	#ken {
+	/* #ken {
 	 top: -90px;
 	 left: 25px;
-	}
+	} */
 
 	#randomizeButton {
 		border-radius: 80%;
@@ -729,10 +729,10 @@ iPad | 768 x1024*/
     margin-left: -80px;
 	}
 
-	#ken {
+	/* #ken {
 		top: -85px;
 	  left: -20px;
-	}
+	} */
 
 	#machine2Result {
     margin-left: -100px;
@@ -802,10 +802,10 @@ iPad Pro | 1024x1366*/
     margin-left: -80px;
 	}
 
-	#ken {
+	/* #ken {
 		top: -85px;
 	  left: -20px;
-	}
+	} */
 
 	#machine2Result {
     margin-left: -100px;
