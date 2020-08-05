@@ -270,7 +270,7 @@ class SalvinificationPage extends React.Component {
                 <div ref={this.screenshotRef} id="toScreenshot">
                   <img className="mt-4 salvini" src={SalviniFace} alt="Salvini's face" />
                   <div ref={this.bodyToScreenRef} id="bodyToScreen">
-                    <div ref={this.machineRef} id="machine" className="randomizeMachine dress">
+                    <div ref={this.machineRef} id="machine" className="randomizeMachine dress" md={4} sm={12}>
                       <div><img src={Dress0} alt="salvini dress 0" /></div>
                       <div><img src={Dress1} alt="salvini dress 1" /></div>
                       <div><img src={Dress2} alt="salvini dress 3" /></div>

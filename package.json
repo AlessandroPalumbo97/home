@@ -16,11 +16,14 @@
     "jquery": "^3.5.1",
     "jquery-slotmachine": "^4.0.1",
     "mdbreact": "^4.27.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-iframe": "^1.8.0",
+    "react-mailto": "^0.4.0",
     "react-popper": "^2.2.3",
+    "react-protected-mailto": "^1.0.3",
     "react-random-selection-wheel": "^0.1.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
@@ -58,5 +61,5 @@
     "@babel/preset-react": "^7.10.4",
     "html-loader": "^1.1.0"
   },
-  "homepage": "https://alessandropalumbo97.github.io/home/"
+  "homepage": "https://alessandropalumbo97.github.io/"
 }
