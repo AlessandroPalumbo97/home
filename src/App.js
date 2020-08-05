@@ -26,9 +26,9 @@ class App extends React.Component {
         // { title: 'Slot', path: '/slot' },
       ],
       home: {
-        title: 'Outstrip the crowd',
-        subtitle: 'Find the right way to be yourself',
-        text: 'Checkout my projects below'
+        title: 'Boss del poppin',
+        subtitle: '99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99',
+        text: 'No caepnoheeeeeeeeeen'
       },
       about: {
         title: 'Be fool, be crazy',
