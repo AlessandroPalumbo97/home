@@ -11,7 +11,8 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import SalvinificationPage from './pages/SalvinificationPage';
 
-import APLogo from '../src/assets/images/AP-square-logo.png';
+// import APLogo from '../src/assets/images/AP-square-logo.png';
+import Logo from './assets/images/AP_square.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -53,11 +54,11 @@ class App extends React.Component {
       <Router>
         <Container className="p-0 my-main-wrapper" fluid={true}>
 
-          <Navbar className="border-bottom" bg="white" expand="lg">
-            <Navbar.Brand><img className="w-25 h-25" src={APLogo} alt="APLogo" /></Navbar.Brand>
+          <Navbar className="border-bottom navbar-fixed-top" bg="light" expand="lg">
+            <Navbar.Brand><Logo /></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
-              <Nav className="ml-auto">
+              <Nav className="mr-5">
                 <Link className="nav-link" to="/">Home</Link>
                 <Link className="nav-link" to="/about">About</Link>
                 <Link className="nav-link" to="/contact">Contact me</Link>

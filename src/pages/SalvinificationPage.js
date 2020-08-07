@@ -219,9 +219,9 @@ class SalvinificationPage extends React.Component {
   }
 
   showBtnScreenshot = () => {
-    const btnScreenshot = this.saveBtnRef.current;
-    if (btnScreenshot !== null) {
-      btnScreenshot.style.display = "block";
+    const screenshotBtn = this.saveBtnRef.current;
+    if (screenshotBtn !== null) {
+      screenshotBtn.style.display = "block";
     }
   }
 
@@ -247,7 +247,6 @@ class SalvinificationPage extends React.Component {
           <Col className="bg-success" md={4} sm={12}></Col>
           <Col className="bg-light" md={4} sm={12}></Col>
           <Col className="bg-danger" md={4} sm={12}></Col>
-          <p></p>
         </Row>
 
         <Hero title={this.props.title} subTitle={this.props.subTitle} text={this.props.text} />
@@ -264,10 +263,10 @@ class SalvinificationPage extends React.Component {
           <div className="container">
             <Row>
               <Col md={3} sm={0}></Col>
-              <Col md={6} sm={6}>
-                <div ref={this.screenshotRef} id="toScreenshot">
-                  <img className="mt-4 salvini" src={SalviniFace} alt="Salvini's face" />
-                  <div ref={this.machineRef} id="machine" className="randomizeMachine mx-auto p-0" md={4} sm={12}>
+              <Col md={6} sm={12}>
+                <div ref={this.screenshotRef}>
+                  <img src={SalviniFace} alt="Salvini's face" />
+                  <div ref={this.machineRef} id="machine" className="mx-auto p-0">
                     <div><img src={Dress0} alt="salvini dress 0" /></div>
                     <div><img src={Dress1} alt="salvini dress 1" /></div>
                     <div><img src={Dress2} alt="salvini dress 3" /></div>
@@ -367,8 +366,8 @@ class SalvinificationPage extends React.Component {
               <Col className="machineResult" md={3} sm={6}>
                 <p ref={this.salviniNameRef} id="machine2Result"> </p>
                 <div className="">
-                  <button ref={this.randomBtnRef} id="randomizeButton" className="btn btn-danger btn-circle shadow-lg" type="button" onClick={this.onSpinClick} disabled={this.state.disableSpin}>Spin!</button>
-                  <button ref={this.saveBtnRef} id="btnScreenshot" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
+                  <button ref={this.randomBtnRef} id="randomBtn" className="btn btn-danger btn-circle shadow-lg" type="button" onClick={this.onSpinClick} disabled={this.state.disableSpin}>Spin!</button>
+                  <button ref={this.saveBtnRef} id="screenshot-btn" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
                   <div className="fb-share-button" data-href="https://www.salvinification.it" data-layout="button" data-size="large" data-mobile-iframe="true">
                     <button type="button" className="btn btn-primary text-center" id="btnShare">
                       <img src="img/fbicon.png" alt="facebook icon" id="fbicon" />
