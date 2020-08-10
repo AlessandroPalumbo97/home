@@ -8,13 +8,14 @@ function Footer() {
 
     return (
         <footer className="mt-5">
-            <Container fluid={true}>
-                <Row className="p-5 border-top justify-content-between p-3">
+            <Container className="my-footer" fluid={true}>
+                <Row className="border-top justify-content-between p-3">
                     <Col className="p-0" md={4} sm={12}>
                         Alessandro Palumbo
                     </Col>
-                    <Col className="p-0 d-flex justify-content-end" md={4}>
-                        <p>You can find me at:</p>
+                    <Col className="p-0" md={4} sm={12}></Col>
+                    <Col className="p-0 text-center" md={4} sm={12}>
+                        <p>You can find me at: </p>
                         <Mailto email="mr.alessandropalumbo@gmail.com" obfuscate={true}>
                             mr.alessandropalumbo@gmail.com
                         </Mailto>

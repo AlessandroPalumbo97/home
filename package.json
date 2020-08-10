@@ -11,7 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
-    "gatsby-plugin-react-svg": "^3.0.0",
+    "gatsby-cli": "^2.12.80",
     "gh-pages": "^3.1.0",
     "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.5.1",
@@ -29,6 +29,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
+    "react-svg-loader": "^3.0.3",
     "slot-machine": "^2.1.0"
   },
   "scripts": {
@@ -58,9 +59,12 @@
   "main": "index.js",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
-    "html-loader": "^1.1.0"
+    "babel-loader": "^8.1.0",
+    "html-loader": "^1.1.0",
+    "svg-url-loader": "^6.0.0"
   },
   "homepage": "https://alessandropalumbo97.github.io/"
 }

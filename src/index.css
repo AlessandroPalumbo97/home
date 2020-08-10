@@ -38,13 +38,13 @@ code {
   min-height: 100px;
 }
 
-.my-footer {
-  height: 5vh;  
+.my-main-wrapper {
+  min-height: 90vh;
+  margin-bottom: -50px;
 }
 
-.my-main-wrapper {
-  min-height: 96vh;
-  margin-bottom: -50px;
+.my-footer {
+  min-height: 10vh;
 }
 
 .success-msg {
@@ -86,7 +86,7 @@ img {
 #machine {
 	opacity: 0;
 	position: absolute;
-	width: 25vh;
+	width: 35vh;
 	height: 50vh;
 }
 
@@ -96,5 +96,5 @@ img {
 }
 
 #randomBtn, #salviniName, #txtSalvinification, #txtPacchia, #txtThanks {
-	font-family: "Impact", "HelveticaNeue-Bold", "HelveticaNeue Bold", "Helvetica Neue Bold", "HelveticaNeue", sans-serif;
+	font-family: "Lust", "Impact", "HelveticaNeue-Bold", "HelveticaNeue Bold", "Helvetica Neue Bold", "HelveticaNeue", sans-serif;
 }

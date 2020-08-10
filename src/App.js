@@ -12,7 +12,7 @@ import ContactPage from './pages/ContactPage';
 import SalvinificationPage from './pages/SalvinificationPage';
 
 // import APLogo from '../src/assets/images/AP-square-logo.png';
-import Logo from './assets/images/AP_square.svg';
+import logo from './assets/images/AP_square.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -54,11 +54,11 @@ class App extends React.Component {
       <Router>
         <Container className="p-0 my-main-wrapper" fluid={true}>
 
-          <Navbar className="border-bottom navbar-fixed-top" bg="light" expand="lg">
-            <Navbar.Brand><Logo /></Navbar.Brand>
+          <Navbar className="border-bottom" bg="light" expand="lg">
+            <Navbar.Brand><img src={logo} alt="Il mio logo" /></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
-              <Nav className="mr-5">
+              <Nav className="ml-auto">
                 <Link className="nav-link" to="/">Home</Link>
                 <Link className="nav-link" to="/about">About</Link>
                 <Link className="nav-link" to="/contact">Contact me</Link>
@@ -72,7 +72,7 @@ class App extends React.Component {
           <Route path="/contact" exact render={() => <ContactPage title={this.state.contact.title} />} />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} text={this.state.salvinification.text} />} />
         </Container>
-        <Footer className="my-footer" fluid={true} />
+        <Footer fluid={true} />
       </Router>
     );
   }
