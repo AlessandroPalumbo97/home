@@ -39,12 +39,8 @@ code {
 }
 
 .my-main-wrapper {
-  min-height: 90vh;
-  margin-bottom: -50px;
-}
-
-.my-footer {
-  min-height: 10vh;
+  min-height: 88vh;
+  /* margin-bottom: -50px; */
 }
 
 .success-msg {

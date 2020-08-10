@@ -38,8 +38,8 @@ class App extends React.Component {
         title: 'Something to say?',
       },
       salvinification: {
-        title: 'Salvinification',
-        subTitle: 'Salvinification is back!... Did you missed it? ;)',
+        title: 'Salvinification...',
+        subTitle: '...is back! Did you missed it? :)',
         text: 'Have fun changing our favourite superhero\'s dresses'
       },
     }
@@ -53,7 +53,6 @@ class App extends React.Component {
     return (
       <Router>
         <Container className="p-0 my-main-wrapper" fluid={true}>
-
           <Navbar className="border-bottom" bg="light" expand="lg">
             <Navbar.Brand><img src={logo} alt="Il mio logo" /></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />

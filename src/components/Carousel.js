@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 import nervous from '../assets/images/NervousCardx2.png';
+import aurora from '../assets/images/auroraCard.png';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -19,14 +20,14 @@ class Carousel extends React.Component {
           link: '',
           selected: false
         },
-        // {
-        //   id: 1,
-        //   title: 'Nervous Fighter',
-        //   subTitle: 'Please don\'t be calm!',
-        //   imgSrc: nervous,
-        //   link: '',
-        //   selected: false
-        // },
+        {
+          id: 1,
+          title: 'Aurora',
+          subTitle: '3D printed robot dog!',
+          imgSrc: aurora,
+          link: '',
+          selected: false
+        },
         // {
         //   id: 2,
         //   title: 'Nervous Fighter',
