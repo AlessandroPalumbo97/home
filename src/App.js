@@ -10,7 +10,6 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import SalvinificationPage from './pages/SalvinificationPage';
 
-// import APLogo from '../src/assets/images/AP-square-logo.png';
 import logo from './assets/images/AP_square.svg';
 
 class App extends React.Component {
@@ -22,7 +21,6 @@ class App extends React.Component {
         { title: 'Home', path: '/' },
         { title: 'About', path: '/about' },
         { title: 'Salvinification', path: '/salvinification' },
-        // { title: 'Slot', path: '/slot' },
       ],
       home: {
         title: 'Boss del poppin',
@@ -34,7 +32,7 @@ class App extends React.Component {
       },
       salvinification: {
         title: 'Salvinification...',
-        subTitle: '...is back! Did you missed it? :)',
+        subTitle: '...is back! Did you missed it?',
         text: 'Have fun changing our favourite superhero\'s dresses'
       },
     }
@@ -48,7 +46,7 @@ class App extends React.Component {
     return (
       <Router>
         <Container className="p-0 my-main-wrapper" fluid={true}>
-          <Navbar className="border-bottom" bg="light" expand="lg">
+          <Navbar className="border-bottom" bg="light" expand="md">
             <Navbar.Brand><img src={logo} alt="Il mio logo" /></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">

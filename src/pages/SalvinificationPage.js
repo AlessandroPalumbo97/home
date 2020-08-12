@@ -5,8 +5,9 @@ import Col from 'react-bootstrap/Col';
 
 import $ from "jquery";
 import html2canvas from 'html2canvas';
-
 import SlotMachine from 'jquery-slotmachine/lib/slot-machine.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faTwitterSquare } from "@fortawesome/free-brands-svg-icons";
 
 import Hero from '../components/Hero';
 
@@ -158,7 +159,7 @@ class SalvinificationPage extends React.Component {
 
   onComplete = (active) => {
     this.salviniName = this.imageToName(this.machine.visibleTile);
-    this.salviniNameRef.current.innerHTML = "<div className='text-dark h4'>HAI SBLOCCATO: <p id='salviniName' className='text-danger'>" + this.salviniName + "</p></div>";
+    this.salviniNameRef.current.innerHTML = "<div className='text-dark h4'>HAI SBLOCCATO: <p id='salvini-name'>" + this.salviniName + "</p></div>";
     this.setState({ currentDress: this.machine.visibleTile });
 
     if (this.machine.visibleTile === 10) {
@@ -244,29 +245,29 @@ class SalvinificationPage extends React.Component {
     return (
       <Container fluid={true}>
         <Row className="mt-0">
-          <Col className="bg-success" md={4} sm={12}></Col>
-          <Col className="bg-light" md={4} sm={12}></Col>
-          <Col className="bg-danger" md={4} sm={12}></Col>
+          <Col className="bg-success" md={4} sm={12}></Col> <br/>
+          <Col className="bg-light" md={4} sm={12}></Col> <br/>
+          <Col className="bg-danger" md={4} sm={12}></Col> <br/>
         </Row>
 
         <Hero title={this.props.title} subTitle={this.props.subTitle} text={this.props.text} />
 
-        <Row ref={this.alertWrapperRef} className="bg-white">
+        <Row className="bg-white p-3" ref={this.alertWrapperRef}>
           <Col md={3} sm={0}></Col>
-          <Col md={6} sm={12}>
-            <div ref={this.alertRef} id="myAlert" className="mw-75 alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! <button onClick={this.toggleAlert} id="btnClose">&times;</button></div>
+          <Col className="text-center" md={6} sm={12}>
+            <div ref={this.alertRef} id="myAlert" className="alert alert-danger"> <strong>ATTENZIONE!</strong> Per proseguire devi pagare 49 milioni di euro! &nbsp; <button id="btnClose" className="btn btn-outline-danger" onClick={this.toggleAlert}>&times;</button></div>
           </Col>
           <Col md={3} sm={0}></Col>
         </Row>
 
-        <Row ref={this.mainWrapperRef} id="randomize" className="bg-white">
+        <Row id="randomize" className="bg-white" ref={this.mainWrapperRef}>
           <div className="container">
-            <Row>
+            <Row id="machine-wrapper">
               <Col md={3} sm={0}></Col>
               <Col md={6} sm={12}>
-                <div ref={this.screenshotRef}>
-                  <img src={SalviniFace} alt="Salvini's face" />
-                  <div ref={this.machineRef} id="machine" className="mx-auto p-0">
+                <div className="text-center" ref={this.screenshotRef}>
+                  <img id="salvini-face" src={SalviniFace} alt="Salvini's face" />
+                  <div id="machine" className="mx-auto p-0" ref={this.machineRef}>
                     <div><img src={Dress0} alt="salvini dress 0" /></div>
                     <div><img src={Dress1} alt="salvini dress 1" /></div>
                     <div><img src={Dress2} alt="salvini dress 3" /></div>
@@ -359,22 +360,24 @@ class SalvinificationPage extends React.Component {
                       <div><img src={Dress89} alt="salvini dress 89" /></div>
                       <div><img src={Dress90} alt="salvini dress 90" /></div> */}
                   </div>
-                  <div id="ken" className=""><img src={Naked} alt="salvini naked" /></div>
-                  <div ref={this.bodyRef}><img src={this.state.dresses[this.state.currentDress]} alt="DRESS" /></div>
+                  <div id="ken"><img src={Naked} alt="salvini naked" /></div>
+                  <div id="dress" ref={this.bodyRef}><img src={this.state.dresses[this.state.currentDress]} alt="DRESS" /></div>
                 </div>
               </Col>
-              <Col className="machineResult" md={3} sm={6}>
-                <p ref={this.salviniNameRef} id="machine2Result"> </p>
+              <Col className="mt-auto mb-auto text-center" md={3} sm={12}>
+                <p id="machine2Result" ref={this.salviniNameRef}> </p>
                 <div className="">
-                  <button ref={this.randomBtnRef} id="randomBtn" className="btn btn-danger btn-circle shadow-lg font-lust" type="button" onClick={this.onSpinClick} disabled={this.state.disableSpin}>Spin!</button>
-                  <button ref={this.saveBtnRef} id="screenshot-btn" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
-                  <div className="fb-share-button" data-href="https://www.salvinification.it" data-layout="button" data-size="large" data-mobile-iframe="true">
-                    <button type="button" className="btn btn-primary text-center" id="btnShare">
-                      <img src="img/fbicon.png" alt="facebook icon" id="fbicon" />
-                      <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.salvinification.it%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore" id="aShare">Condividi</a>
-                    </button>
+                  <button ref={this.randomBtnRef} id="randomBtn" className="btn btn-danger btn-circle shadow-lg font-lust m-4" onClick={this.onSpinClick} disabled={this.state.disableSpin}>Spin!</button> <br/>
+                  <button ref={this.saveBtnRef} id="screenshot-btn" className="btn ml-auto mr-auto text-light" onClick={this.screenshot}>Salva il tuo Salvini</button> <br/>
+                  <div className="btn-group">
+                    <div data-href="https://www.salvinification.it" data-layout="button" data-size="large" data-mobile-iframe="true">
+                      <a className="btn btn-primary text-light" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.salvinification.it%2F&amp;src=sdkpreparse"> <FontAwesomeIcon icon={faFacebook} /> </a>
+                    </div>
+                    &nbsp;
+                    <div>
+                      <a id="btnTweet" className="btn btn-info" href="https://twitter.com/intent/tweet?text=Gira%20la%20ruota%20e%20scopri%20quale%20divisa%20indosserà%20ogg%20il%20ministro%20Salvini%20per%20salvare%20il%20paese%20" data-size="large"> <FontAwesomeIcon icon={faTwitterSquare} /> </a>
+                    </div>
                   </div>
-                  <a id="btnTweet" className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Gira%20la%20ruota%20e%20scopri%20quale%20divisa%20indosserà%20ogg%20il%20ministro%20Salvini%20per%20salvare%20il%20paese%20" data-size="large">Tweet</a>
                 </div>
               </Col>
             </Row>

@@ -7,9 +7,9 @@ import Mailto from 'react-protected-mailto';
 function Footer() {
 
     return (
-        <footer className="mt-5">
+        <footer>
             <Container id="my-footer" fluid={true}>
-                <Row className="border-top text-center p-4">
+                <Row className="border-top text-center pt-4 pb-4">
                     <Col className="p-0 mt-auto mb-auto font-lust " md={4} sm={12}>
                         <h4 className="mt-auto mb-auto">Alessandro Palumbo</h4>
                     </Col>
