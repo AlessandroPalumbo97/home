@@ -366,7 +366,7 @@ class SalvinificationPage extends React.Component {
               <Col className="machineResult" md={3} sm={6}>
                 <p ref={this.salviniNameRef} id="machine2Result"> </p>
                 <div className="">
-                  <button ref={this.randomBtnRef} id="randomBtn" className="btn btn-danger btn-circle shadow-lg" type="button" onClick={this.onSpinClick} disabled={this.state.disableSpin}>Spin!</button>
+                  <button ref={this.randomBtnRef} id="randomBtn" className="btn btn-danger btn-circle shadow-lg font-lust" type="button" onClick={this.onSpinClick} disabled={this.state.disableSpin}>Spin!</button>
                   <button ref={this.saveBtnRef} id="screenshot-btn" className="btn btn-primary btn-flex mt-4" type="button" onClick={this.screenshot} >Salva il tuo Salvini</button>
                   <div className="fb-share-button" data-href="https://www.salvinification.it" data-layout="button" data-size="large" data-mobile-iframe="true">
                     <button type="button" className="btn btn-primary text-center" id="btnShare">

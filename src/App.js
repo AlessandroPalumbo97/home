@@ -8,7 +8,6 @@ import './App.css';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
 import SalvinificationPage from './pages/SalvinificationPage';
 
 // import APLogo from '../src/assets/images/AP-square-logo.png';
@@ -22,7 +21,6 @@ class App extends React.Component {
       headerLinks: [
         { title: 'Home', path: '/' },
         { title: 'About', path: '/about' },
-        { title: 'Contact', path: '/contact' },
         { title: 'Salvinification', path: '/salvinification' },
         // { title: 'Slot', path: '/slot' },
       ],
@@ -33,9 +31,6 @@ class App extends React.Component {
       },
       about: {
         title: 'Be fool, be crazy',
-      },
-      contact: {
-        title: 'Something to say?',
       },
       salvinification: {
         title: 'Salvinification...',
@@ -60,7 +55,6 @@ class App extends React.Component {
               <Nav className="ml-auto">
                 <Link className="nav-link" to="/">Home</Link>
                 <Link className="nav-link" to="/about">About</Link>
-                <Link className="nav-link" to="/contact">Contact me</Link>
                 <Link className="nav-link" to="/salvinification">Salvinification</Link>
               </Nav>
             </Navbar.Collapse>
@@ -68,7 +62,6 @@ class App extends React.Component {
 
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} />} />
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} />} />
-          <Route path="/contact" exact render={() => <ContactPage title={this.state.contact.title} />} />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} text={this.state.salvinification.text} />} />
         </Container>
         <Footer fluid={true} />

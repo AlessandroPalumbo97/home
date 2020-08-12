@@ -22,7 +22,7 @@ class Hero extends React.Component {
   }
 
   render() {
-    const titleSize = this.state.isMobile ? 'display-4 font-weight-bolder' : 'display-1 font-weight-bolder';
+    const titleSize = this.state.isMobile ? 'display-5 font-weight-bolder font-lust' : 'display-1 font-weight-bolder font-lust';
     const subTitleSize = this.state.isMobile ? 'display-5 font-weight-light' : 'display-4 font-weight-light';
 
     return (

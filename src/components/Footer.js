@@ -7,15 +7,16 @@ import Mailto from 'react-protected-mailto';
 function Footer() {
 
     return (
-        <footer className="mt-5 p-0">
-            <Container className="my-footer mt-auto mb-auto" fluid={true}>
-                <Row className="border-top justify-content-between p-3 align-middle">
-                    <Col className="p-0 mt-auto mb-auto" md={4} sm={12}>
-                        <span>Alessandro Palumbo</span>
+        <footer className="mt-5">
+            <Container id="my-footer" fluid={true}>
+                <Row className="border-top text-center p-4">
+                    <Col className="p-0 mt-auto mb-auto font-lust " md={4} sm={12}>
+                        <h4 className="mt-auto mb-auto">Alessandro Palumbo</h4>
                     </Col>
-                    <Col className="p-0" md={4} sm={12}></Col>
-                    <Col className="p-0 text-center" md={4} sm={12}>
-                        <p>You can find me at: </p>
+                    <Col className="p-0 mt-auto mb-auto" md={4} sm={12}></Col>
+                    <Col className="p-0 mt-auto mb-auto font-novel-sans" md={4} sm={12}>
+                        <span>You can find me at: </span>
+                        <br />
                         <Mailto email="mr.alessandropalumbo@gmail.com" obfuscate={true}>
                             mr.alessandropalumbo@gmail.com
                         </Mailto>
