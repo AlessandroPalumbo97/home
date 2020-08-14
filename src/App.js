@@ -21,6 +21,7 @@ class App extends React.Component {
         { title: 'Home', path: '/' },
         { title: 'About', path: '/about' },
         { title: 'Salvinification', path: '/salvinification' },
+        { title: 'Aurora', path: '/aurora' },
       ],
       home: {
         title: 'Boss del poppin',
@@ -35,6 +36,11 @@ class App extends React.Component {
         subTitle: '...is back! Did you missed it?',
         text: 'Have fun changing our favourite superhero\'s dresses'
       },
+      aurora: {
+        title: 'Aurora',
+        subTitle: 'A brand new man\'s best friend',
+        text: 'Aurora is a robot dog prototype made by me and Leonardo Paglia'
+      }
     }
   }
 

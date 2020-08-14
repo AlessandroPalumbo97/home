@@ -4,8 +4,16 @@ import Card from '../components/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
+import nervousLink from '../assets/compressed/nervous_fighter.zip';
+
 import nervousCard from '../assets/images/nervousCardx2.png';
 import auroraCard from '../assets/images/auroraCardx2.png';
+
+// aurora: {
+//   title: 'Aurora',
+//   subTitle: 'A brand new man\'s best friend',
+//   text: 'Aurora is a robot dog prototype made by me and Leonardo Paglia'
+// }
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -17,8 +25,9 @@ class Carousel extends React.Component {
           title: 'Nervous Fighter!',
           subTitle: 'My BETA version of a stickman fighter',
           imgSrc: nervousCard,
-          link: '',
-          selected: false
+          link: nervousLink,
+          selected: false,
+          downloadable: true
         },
         {
           id: 1,
@@ -26,7 +35,8 @@ class Carousel extends React.Component {
           subTitle: '3D printed robot dog!',
           imgSrc: auroraCard,
           link: '',
-          selected: false
+          selected: false,
+          downloadable: false
         },
         // {
         //   id: 2,

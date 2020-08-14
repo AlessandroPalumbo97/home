@@ -21,6 +21,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.5.1",
     "jquery-slotmachine": "^4.0.1",
+    "js-file-download": "^0.4.12",
     "mdbreact": "^4.27.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
