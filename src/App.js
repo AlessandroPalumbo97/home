@@ -9,8 +9,9 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import SalvinificationPage from './pages/SalvinificationPage';
+import SalvinificationPageTest from './pages/SalvinificationPageTest';
 
-import logo from './assets/images/AP_square.svg';
+import logo from './assets/images/AP_logo_hot.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,10 +22,11 @@ class App extends React.Component {
         { title: 'Home', path: '/' },
         { title: 'About', path: '/about' },
         { title: 'Salvinification', path: '/salvinification' },
+        { title: 'Salvinification test', path: '/salvinificationTest' },
         { title: 'Aurora', path: '/aurora' },
       ],
       home: {
-        title: 'Boss del poppin',
+        title: 'Alessandro Palumbo',
         subtitle: '99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99',
         text: 'No caepnoheeeeeeeeeen'
       },
@@ -36,11 +38,11 @@ class App extends React.Component {
         subTitle: '...is back! Did you missed it?',
         text: 'Have fun changing our favourite superhero\'s dresses'
       },
-      aurora: {
-        title: 'Aurora',
-        subTitle: 'A brand new man\'s best friend',
-        text: 'Aurora is a robot dog prototype made by me and Leonardo Paglia'
-      }
+      salvinificationTest: {
+        title: 'Salvinification test...',
+        subTitle: 'Clap ya hands bitch!',
+        text: 'GRRRRR PA PA!'
+      },
     }
   }
 
@@ -52,14 +54,16 @@ class App extends React.Component {
     return (
       <Router>
         <Container className="p-0 my-main-wrapper" fluid={true}>
-          <Navbar className="border-bottom" bg="light" expand="md">
+          <Navbar className="border-bottom font-reross-quad" bg="dark" expand="md">
             <Navbar.Brand><img src={logo} alt="Il mio logo" /></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
-                <Link className="nav-link" to="/">Home</Link>
-                <Link className="nav-link" to="/about">About</Link>
-                <Link className="nav-link" to="/salvinification">Salvinification</Link>
+                <Link className="nav-link text-light" to="/">Home</Link>
+                <Link className="nav-link text-light" to="/about">About</Link>
+                <Link className="nav-link text-light" to="/salvinification">Salvinification</Link>
+                <Link className="nav-link text-light" to="/salvinificationTest">Salvinification test</Link>
+
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -67,6 +71,7 @@ class App extends React.Component {
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} />} />
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} />} />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} text={this.state.salvinification.text} />} />
+          <Route path="/salvinificationTest" exact render={() => <SalvinificationPageTest title={this.state.salvinificationTest.title} subTitle={this.state.salvinificationTest.subTitle} text={this.state.salvinificationTest.text} />} />
         </Container>
         <Footer fluid={true} />
       </Router>

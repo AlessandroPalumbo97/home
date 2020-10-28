@@ -37,9 +37,11 @@ code {
 }
 
 .my-main-wrapper {
-  min-height: 92.445vh;
+  width: 100vw;
+  min-height: 92.3vh;
   flex: 1 0 auto;
   font-family: novel-sans-pro, serif;
+  background-image: url("./assets/images/AP_web_BG.jpg");
 }
 
 #my-footer {
@@ -63,76 +65,174 @@ code {
   font-style: normal;
 }
 
+.font-vortice {
+  font-family: vortice-concept,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .font-novel-sans {
   font-family: novel-sans-pro, sans-serif;
   font-weight: 200;
   font-style: normal;
 }
 
-::-webkit-scrollbar {display:none;}
+.font-filicudi {
+  font-family: filicudi-solid,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-/* SALVINIFICATION */
+.font-alfarn {
+  font-family: alfarn,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-carlmarx-bold {
+  font-family: carlmarx,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.font-carlmarx-light {
+  font-family: carlmarx,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-joschmi {
+  font-family: joschmi,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-reross-quad {
+  font-family: reross-quadratic,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-reross-rect {
+  font-family: reross-rectangular,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-xants {
+  font-family: xants,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.title {
+  font-size: 6.5vw;
+  font-weight: bolder;
+}
+
+.subtitle {
+  font-size: 3vw;
+  font-weight: lighter;
+}
+
+::-webkit-scrollbar {display:none;}
 
 img {
 	width: 80%;
 	height: 80%;
 }
 
-#randomBtn {
-	border-radius: 80%;
-	padding: 45px;
-	font-size: 30px;
-	margin-left: 16px;
-}
+/* SALVINIFICATION */
 
-#screenshot-btn {
-	background-color: #FF5E33!important;
-  border-color: #FF5E33!important;
-  display: none;
-}
-
-#machine-wrapper {
+.salvini-face {
   position: relative;
+  top: 160px;
+  width: 200px;
+  height: 200px;
+  z-index: 1000;
 }
 
-#salvini-face {
+.flag {
+  min-height: 15px;
+}
+
+/* SLOT */
+
+.salvini-dress {
+  margin-bottom: 5px;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.slot {
   position: relative;
-  top: 163px;
-  z-index: 2;
-  width: 50%;
-  height: 50%;
+  display: inline-block;
+  min-width: 400px;
+  min-height: 650px;
+  max-width: 700px;
+  max-height: 1100px;
 }
 
-#machine {
-  opacity: 0;
+section {
   position: absolute;
-	width: 35vh;
-  height: 50vh;
+  /* border-radius: 15px !important; */
+  /* border: 3px solid black !important; */
+  min-width: 400px;
+  min-height: 650px;
+  max-width: 700px;
+  max-height: 1100px;
+  overflow: hidden;
+  /* background-color: grey; */
+  /* border-radius: 2px; */
+  /* border: 1px solid lightgrey; */
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  font-size: 25px;
+  line-height: 60px;
+  cursor: default;
 }
 
-#dress {
-  position: relative;
-  top: -33px;
+.slot-container {
+  position: absolute;
+  top: 2px;
+  width: 100%;
+  transition: top ease-in-out 0.5s;
+  text-align: center;
 }
 
-#myAlert {
-	display: none;
-	margin: auto;
+.roll {
+  width: 215px;
+  cursor: pointer;
+  background-color: yellow;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 20px;
+  border: 3px solid black;
 }
 
-#salvini-name {
-  font-family: lust, serif;
-  font-size: 30px;
+.rolling {
+  animation: blinkingText 1.2s infinite;
 }
 
-/* Fix medium size body displacement */
-@media (min-width: 768px) and (max-width: 991.98px)
-{
-  #machine {
-    opacity: 0;
-    position: absolute;
-    width: 35vh;
-    height: 50vh;
-    left: -60px;
+@keyframes blinkingText {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: #000;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
   }
 }
