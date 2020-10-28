@@ -6,23 +6,20 @@ import Slot from '../components/Slot'
 
 import Hero from '../components/Hero';
 
-import salvini from '../assets/salvinification/s3.png';
-
-class SalvinificationPageTest extends React.Component {
-
-  render() {
-    return (
-      <Container fluid={true}>
-        <Row>
-          <Col className="bg-danger flag" sm={12} md={4}></Col>
-          <Col className="bg-light flag" sm={12} md={4}></Col>
-          <Col className="bg-success flag" sm={12} md={4}></Col>
-        </Row>
-        <Slot />
-      </Container>
-    );
-  }
+function SalvinificationPageTest(props) {
+  return (
+    <Container fluid={true}>
+      <Row>
+        <Col className="bg-danger flag" sm={12} md={4}></Col>
+        <Col className="bg-light flag" sm={12} md={4}></Col>
+        <Col className="bg-success flag" sm={12} md={4}></Col>
+      </Row>
+      <Hero title={props.title} subTitle={props.subTitle} text={props.text}/> 
+      <Slot />
+    </Container>
+  );
 }
+
 
 export default SalvinificationPageTest;
 

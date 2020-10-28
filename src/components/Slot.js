@@ -15,13 +15,15 @@ const { createRef , Component } = React;
 
 class Slot extends Component {
   static defaultProps = {
-    dresses: [Dress0, Dress1, Dress2, Dress3, Dress4]
+    dresses: [Dress0, Dress1, Dress2, Dress3, Dress4],
+    names: ["Spock-vini", "S.W.A.Tvini", "Salvini carramba", "Salvini ufficiale", "Salvini pulotto"]
   };
 
   constructor(props) {
     super(props);
     this.state = { 
       slot: Dress0,
+      name: null,
       rolling: false,
       lastOption: null
     };
@@ -52,8 +54,6 @@ class Slot extends Component {
     }
     let options = ref.children;
     let randomOption = this.avoidDuplicateOption();
-    console.log("RANDOM OPTION: " + randomOption);
-
     let choosenOption = options[randomOption];
     setTop(-choosenOption.offsetTop + 2);
     return Slot.defaultProps.dresses[randomOption];
@@ -67,6 +67,9 @@ class Slot extends Component {
     }
     
     this.setState({ lastOption: random });
+    setTimeout(() => {
+      this.setState({ name: Slot.defaultProps.names[random] });
+    }, 600);
     return random;
   }
 
@@ -81,9 +84,9 @@ class Slot extends Component {
             <div className="slot">
               <section>
                 <div className="slot-container" ref={this.slotRef}>
-                  {Slot.defaultProps.dresses.map((fruit, i) => (
+                  {Slot.defaultProps.dresses.map((dress, i) => (
                     <div key={i}>
-                      <img className="salvini-dress" src={fruit} alt="salvini dress" />
+                      <img className="salvini-dress" src={dress} alt="salvini dress" />
                     </div>
                   ))}
                 </div>
@@ -91,6 +94,7 @@ class Slot extends Component {
             </div>
           </Col>
           <Col className="my-auto" md={6} sm={12}>
+            <h2 className="my-4 font-weight-bolder display-4">{this.state.name}</h2>
             <div
               className={!this.state.rolling ? "roll rolling mx-auto" : "roll mx-auto"}
               // onClick={!this.state.rolling && this.roll}

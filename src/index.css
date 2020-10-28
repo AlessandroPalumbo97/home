@@ -158,6 +158,10 @@ img {
 
 /* SLOT */
 
+.SlotMachine {
+  margin-top: -100px;
+}
+
 .salvini-dress {
   margin-bottom: 5px;
 }
