@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import SalvinificationPage from './pages/SalvinificationPage';
-import SalvinificationPageTest from './pages/SalvinificationPageTest';
+import AuroraDetailPage from './pages/AuroraDetailPage'
 
 import logo from './assets/images/AP_logo_hot.svg';
 
@@ -22,26 +22,24 @@ class App extends React.Component {
         { title: 'Home', path: '/' },
         { title: 'About', path: '/about' },
         { title: 'Salvinification', path: '/salvinification' },
-        { title: 'Salvinification test', path: '/salvinificationTest' },
-        { title: 'Aurora', path: '/aurora' },
+        { title: 'Aurora', path: '/projects/aurora' },
       ],
       home: {
         title: 'Alessandro Palumbo',
-        subtitle: '99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99 99',
-        text: 'No caepnoheeeeeeeeeen'
+        subtitle: 'Welcome to my crazy place 🤪',
+        text: 'Check out my projects below, contact me, or just have fun playing Salvinification'
       },
       about: {
-        title: 'Be fool, be crazy',
+        title: 'Hi there!',
+        subtitle: 'Nice to meet you 😁'
       },
       salvinification: {
-        title: 'Salvinification...',
-        subTitle: '...is back! Did you missed it?',
-        text: 'Have fun changing our favourite superhero\'s dresses'
+        title: 'Salvinification 2.0',
+        subTitle: 'Have fun changing our favourite superhero\'s dresses',
       },
-      salvinificationTest: {
-        title: 'Salvinification test...',
-        subTitle: 'Clap ya hands bitch!',
-        text: 'GRRRRR PA PA!'
+      aurora: {
+        title: 'Aurora',
+        subTitle: 'Aurora is a robotic dog, thought and originated from scratch',
       },
     }
   }
@@ -55,23 +53,21 @@ class App extends React.Component {
       <Router>
         <Container className="p-0 my-main-wrapper" fluid={true}>
           <Navbar className="border-bottom font-reross-quad" bg="dark" expand="md">
-            <Navbar.Brand><img src={logo} alt="Il mio logo" /></Navbar.Brand>
+            <Navbar.Brand><Link to="/"><img src={logo} alt="Il mio logo" /></Link></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
                 <Link className="nav-link text-light" to="/">Home</Link>
                 <Link className="nav-link text-light" to="/about">About</Link>
                 <Link className="nav-link text-light" to="/salvinification">Salvinification</Link>
-                <Link className="nav-link text-light" to="/salvinificationTest">Salvinification test</Link>
-
               </Nav>
             </Navbar.Collapse>
           </Navbar>
 
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} />} />
-          <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} />} />
-          <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} text={this.state.salvinification.text} />} />
-          <Route path="/salvinificationTest" exact render={() => <SalvinificationPageTest title={this.state.salvinificationTest.title} subTitle={this.state.salvinificationTest.subTitle} text={this.state.salvinificationTest.text} />} />
+          <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} />} />
+          <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} />} />
+          <Route path="/projects/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} />} />
         </Container>
         <Footer fluid={true} />
       </Router>

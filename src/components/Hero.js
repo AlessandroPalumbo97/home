@@ -25,11 +25,11 @@ class Hero extends React.Component {
     return (
       <Jumbotron className="bg-transparent jumbotron-fluid p-0">
         <Container fluid={true}>
-          <Row className="justify-content-center py-5">
+          <Row className="justify-content-center pt-5 pb-2">
             <Col md={8} sm={12}>
               {this.props.title && <h1 className="title font-reross-quad">{this.props.title}</h1>}
               {this.props.subTitle && <h3 className="subtitle">{this.props.subTitle}</h3>}
-              {this.props.text && <h3 className="lead font-weight-light">{this.props.text}</h3>}
+              {this.props.text && <h3 className="lead mt-4 font-weight-light">{this.props.text}</h3>}
             </Col>
           </Row>
         </Container>
