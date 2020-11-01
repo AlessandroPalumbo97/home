@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f899862a4cea114944f93973e5674d75",
+    "revision": "0fd0f6debb76caf4c223d9755c807e5c",
     "url": "/index.html"
   },
   {
-    "revision": "56df82299753c52e97d5",
+    "revision": "c81116428ae4b398cffe",
     "url": "/static/css/2.f3cffc9e.chunk.css"
   },
   {
-    "revision": "5eef7e1e0784afea9ed9",
-    "url": "/static/css/main.72def63e.chunk.css"
+    "revision": "f79f4c7ed28aea69a0ec",
+    "url": "/static/css/main.63b8c841.chunk.css"
   },
   {
-    "revision": "56df82299753c52e97d5",
-    "url": "/static/js/2.5ec5fd3d.chunk.js"
+    "revision": "c81116428ae4b398cffe",
+    "url": "/static/js/2.cc4bf997.chunk.js"
   },
   {
-    "revision": "c9af5f88bc01ae24054e4a7e749c86cc",
-    "url": "/static/js/2.5ec5fd3d.chunk.js.LICENSE.txt"
+    "revision": "1ac24784d5468bb3a63256a34b6732e3",
+    "url": "/static/js/2.cc4bf997.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5eef7e1e0784afea9ed9",
-    "url": "/static/js/main.a1aba9de.chunk.js"
+    "revision": "f79f4c7ed28aea69a0ec",
+    "url": "/static/js/main.972b33f3.chunk.js"
   },
   {
     "revision": "efe25b4b8d1f7af9da4b",
@@ -52,10 +52,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/AP_logo_hot.8ff41fce.svg"
   },
   {
-    "revision": "ff5cf8428c3a86a1a559489185702d48",
-    "url": "/static/media/AP_web_BG.ff5cf842.jpg"
-  },
-  {
     "revision": "14a9a5901a364cd9b52090cebbb635fc",
     "url": "/static/media/Ken.14a9a590.png"
   },
@@ -84,6 +80,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/draw2.33bc2cf0.png"
   },
   {
+    "revision": "d70d791e00059b76364823794296d738",
+    "url": "/static/media/face0.d70d791e.png"
+  },
+  {
+    "revision": "392a941658199c3ed2c8a8b7c249e114",
+    "url": "/static/media/face1.392a9416.png"
+  },
+  {
     "revision": "e835a5cd7a4891dfa7bf9bd6cce75e31",
     "url": "/static/media/nervousCardx2.e835a5cd.png"
   },
@@ -98,9 +102,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "16f2ae0ed2c383940010a8676beed8ca",
     "url": "/static/media/render2.16f2ae0e.jpg"
-  },
-  {
-    "revision": "d70d791e00059b76364823794296d738",
-    "url": "/static/media/s3.d70d791e.png"
   }
 ]);
