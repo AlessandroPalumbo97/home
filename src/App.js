@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import './App.css';
+import ParticlesBg from 'particles-bg'
 
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -52,7 +53,7 @@ class App extends React.Component {
     return (
       <Router>
         <Container className="p-0 my-main-wrapper" fluid={true}>
-          <Navbar className="border-bottom font-reross-quad" bg="dark" expand="md">
+          <Navbar className="font-reross-quad" bg="dark" expand="md">
             <Navbar.Brand><Link to="/"><img src={logo} alt="Il mio logo" /></Link></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
@@ -68,6 +69,8 @@ class App extends React.Component {
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} />} />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} />} />
           <Route path="/projects/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} />} />
+          <ParticlesBg type="cobweb" num={80} bg={true} />
+
         </Container>
         <Footer fluid={true} />
       </Router>

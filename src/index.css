@@ -45,7 +45,7 @@ p {
   min-height: 92.3vh;
   flex: 1 0 auto;
   font-family: novel-sans-pro, serif;
-  background-image: url("./assets/images/AP_web_BG.jpg");
+  /* background-image: url("./assets/images/AP_web_BG.jpg"); */
 }
 
 #my-footer {
@@ -150,7 +150,7 @@ img {
 
 .salvini-face {
   position: relative;
-  top: 160px;
+  left: -10px;
   width: 200px;
   height: 200px;
   z-index: 1000;
@@ -166,16 +166,12 @@ img {
   margin-top: -180px;
 }
 
-.salvini-dress {
-  margin-bottom: 5px;
-}
-
 .App {
   font-family: sans-serif;
   text-align: center;
 }
 
-#slot {
+#body-slot {
   position: relative;
   display: inline-block;
   min-width: 400px;
@@ -184,12 +180,33 @@ img {
   max-height: 1100px;
 }
 
-section {
+#face-slot {
+  position: relative;
+  display: inline-block;
+  min-width: 400px;
+  max-width: 700px;
+  height: 200px;
+}
+
+.face-section {
+  min-width: 400px;
+  max-width: 700px;
+  height: 200px;
   position: absolute;
+  top: 175px;
+  overflow: hidden;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  font-size: 25px;
+}
+
+.body-section {
   min-width: 400px;
   min-height: 650px;
   max-width: 700px;
   max-height: 1100px;
+  position: absolute;
   overflow: hidden;
   color: white;
   font-family: sans-serif;
@@ -207,20 +224,19 @@ section {
   text-align: center;
 }
 
+.roll-face {
+  background-color: #DC3545;
+}
+
+.roll-body {
+  background-color: transparent;
+}
+
 .roll {
-  background-color: yellow;
+  background-color: #28A745;
 }
 
-.screenshot {
-  display: none;
-  background-color: grey;
-}
-
-#screenshot-name {
-  display: none;
-}
-
-.roll, .screenshot {
+.roll, .roll-face, .roll-body, .screenshot {
   width: 215px;
   cursor: pointer;
   padding: 10px;
@@ -232,6 +248,15 @@ section {
 
 .rolling {
   animation: blinkingText 1.2s infinite;
+}
+
+.screenshot {
+  display: none;
+  background-color: grey;
+}
+
+#screenshot-name {
+  display: none;
 }
 
 @keyframes blinkingText {

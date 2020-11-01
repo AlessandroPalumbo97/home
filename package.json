@@ -19,6 +19,7 @@
     "jquery": "^3.5.1",
     "js-file-download": "^0.4.12",
     "mdbreact": "^4.27.0",
+    "particles-bg": "^2.5.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
