@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import './App.css';
-import ParticlesBg from 'particles-bg'
+import ParticlesBg from 'particles-bg';
 
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -14,37 +14,14 @@ import AuroraDetailPage from './pages/AuroraDetailPage'
 
 import logo from './assets/images/AP_logo_hot.svg';
 
-let bgConfig = {
-  num: [5, 10],
-  rps: 0.1,
-  radius: [30, 40],
-  life: [1.5, 3],
-  v: [2, 3],
-  tha: [-40, 40],
-  // body: "./img/icon.png", // Whether to render pictures
-  // rotate: [0, 20],
-  alpha: [0.6, 0],
-  scale: [1 , 0.1],
-  position: {x:1,y:1,width: 10000, height: 200},
-  color: ["random", "#ff0000"],
-  cross: "dead", // cross or bround
-  random: 15,  // or null,
-  g: 15,    // gravity
-  // f: [2, -1], // force
-  onParticleUpdate: (ctx, particle) => {
-      ctx.beginPath();
-      ctx.rect(particle.p.x, particle.p.y, particle.radius * 2, particle.radius * 2);
-      ctx.fillStyle = particle.color;
-      ctx.fill();
-      ctx.closePath();
-  }
-};
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: 'Alessandro Palumbo',
+      bgTypes: ["cobweb", "circle", "square"],
+      navClass: ["font-reross-quad border-bottom", "font-reross-quad border-bottom navbar-dark", "font-reross-quad border-bottom"],
+      navLinkClass: ["nav-link", "nav-link text-light", "nav-link"],
       headerLinks: [
         { title: 'Home', path: '/' },
         { title: 'About', path: '/about' },
@@ -75,28 +52,31 @@ class App extends React.Component {
     document.title="Alessandro Palumbo";
   }
 
+
   render() {
+    let randomBg = Math.floor(Math.random() * this.state.bgTypes.length);
+    let bgType = this.state.bgTypes[randomBg];
+    
     return (
       <Router>
-        <Container className="p-0 my-main-wrapper" fluid={true}>
-          <Navbar className="font-reross-quad" bg="dark" expand="md">
+        <Container id="my-main-wrapper" className="p-0" fluid={true}>
+          <Navbar className={this.state.navClass[randomBg]} bg="transparent" expand="md">
             <Navbar.Brand><Link to="/"><img id="nav-logo" src={logo} alt="Il mio logo" /></Link></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
-                <Link className="nav-link text-light" to="/">Home</Link>
-                <Link className="nav-link text-light" to="/about">About</Link>
-                <Link className="nav-link text-light" to="/salvinification">Salvinification</Link>
+                <Link className={this.state.navLinkClass[randomBg]} to="/">Home</Link>
+                <Link className={this.state.navLinkClass[randomBg]} to="/about">About</Link>
+                <Link className={this.state.navLinkClass[randomBg]} to="/salvinification">Salvinification</Link>
               </Nav>
             </Navbar.Collapse>
+            <ParticlesBg color="#000000" type={bgType} num={15} bg={true} />
           </Navbar>
 
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} />} />
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} />} />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} />} />
           <Route path="/projects/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} />} />
-          <ParticlesBg color="#F7A000" type="cobweb" num={50} bg={true} />
-
         </Container>
         <Footer fluid={true} />
       </Router>

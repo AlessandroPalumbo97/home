@@ -41,6 +41,7 @@ class Slot extends Component {
     this.faceSlotRef = React.createRef();
     this.bodySlotRef = React.createRef();
     this.captureBtnRef = React.createRef();
+    this.captureLabelRef = React.createRef();
     this.screenshotNameRef = React.createRef();
   }
 
@@ -61,7 +62,6 @@ class Slot extends Component {
 
     const selected = this.triggerFaceSlotRotation(this.faceSlotRef.current);
     this.setState({ face: selected });
-    console.log("DIO");
   };
 
   // This will create a rolling effect and return random selected option
@@ -74,7 +74,6 @@ class Slot extends Component {
     console.log(randomOption);
     let choosenOption = options[randomOption];
     setTop(-choosenOption.offsetTop);
-    console.log("CANE");
     return Slot.defaultProps.faces[randomOption];
   };
 
@@ -84,17 +83,16 @@ class Slot extends Component {
 
     while (random === this.state.lastFaceOption) {
       random = Math.floor(Math.random() * Slot.defaultProps.faces.length);
-      console.log("GIGI");
     }
     
     this.setState({ lastFaceOption: random });
 
     setTimeout(() => {
-      if (this.captureBtnRef.current.style.display !== "none") {
+      if (this.captureBtnRef.current.style.display !== "block") {
         this.captureBtnRef.current.style.display = "block";
+        this.captureLabelRef.current.style.display = "block";
       }
     }, 600);
-    console.log("PORCO");
 
     return random;
   }
@@ -134,8 +132,9 @@ class Slot extends Component {
 
     setTimeout(() => {
       this.setState({ name: Slot.defaultProps.names[random] });
-      if (this.captureBtnRef.current.style.display !== "none") {
+      if (this.captureBtnRef.current.style.display !== "block") {
         this.captureBtnRef.current.style.display = "block";
+        this.captureLabelRef.current.style.display = "block";
       }
     }, 600);
 
@@ -210,9 +209,10 @@ class Slot extends Component {
             <div className={!this.state.rolling ? "roll rolling mx-auto my-2" : "roll mx-auto my-2"} onClick={!this.state.rolling ? this.rollBoth :  undefined} disabled={this.state.rolling} >
               {this.state.rolling ? "Rolling..." : "ROLL BOTH"} 
             </div>
-            <div className="screenshot mx-auto my-4" onClick={this.screenshot} ref={this.captureBtnRef} disabled={this.state.rolling}>
+            <div className="screenshot mx-auto mt-4" onClick={this.screenshot} ref={this.captureBtnRef} disabled={this.state.rolling} target="_self">
               SAVE HIM {downloadIcon}
             </div>
+            <p ref={this.captureLabelRef} className="screenshot-label text-muted">Desktop only</p>
           </Col>
         </Row>
         {/* <Row className="text-center font weight-bolder my-4">

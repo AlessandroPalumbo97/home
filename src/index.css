@@ -44,27 +44,17 @@ p {
   min-height: 100px;
 }
 
-.my-main-wrapper {
+#my-main-wrapper {
   width: 100vw;
   min-height: 92.3vh;
   flex: 1 0 auto;
   font-family: novel-sans-pro, serif;
-  /* background-image: url("./assets/images/AP_web_BG.jpg"); */
 }
 
 #my-footer {
   min-height: 7.555vh;
   flex-shrink: none;
-}
-
-.success-msg {
-  color: #57A773;
-  padding: 10px 15px;
-}
-
-.error-msg {
-  color: #EE6352;
-  padding: 10px 15px;
+  background-color: #000000;
 }
 
 .font-lust {
@@ -154,7 +144,7 @@ img {
 
 .salvini-face {
   position: relative;
-  left: -10px;
+  left: -5px;
   width: 200px;
   height: 200px;
   z-index: 1000;
@@ -177,19 +167,18 @@ img {
 
 #body-slot {
   position: relative;
-  display: inline-block;
-  min-width: 400px;
-  min-height: 650px;
-  max-width: 700px;
-  max-height: 1100px;
+  width: 400px;
+  height: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #face-slot {
   position: relative;
-  display: inline-block;
-  min-width: 400px;
-  max-width: 700px;
+  width: 400px;
   height: 200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .face-section {
@@ -257,6 +246,13 @@ img {
 .screenshot {
   display: none;
   background-color: grey;
+}
+
+.screenshot-label {
+  display: none;
+  font-size: 10px;
+  padding: none;
+  margin: none;
 }
 
 #screenshot-name {

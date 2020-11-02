@@ -8,10 +8,10 @@ function Footer() {
 
     return (
         <footer>
-            <Container id="my-footer" className="bg-dark" fluid={true}>
+            <Container id="my-footer" fluid={true}>
                 <Row className="border-top text-center text-light pt-4 pb-4">
                     <Col className="p-0 mt-auto mb-auto font-reross-quad " md={4} sm={12}>
-                        <h4 className="mt-auto mb-auto">Alessandro Palumbo</h4>
+                        <h4 className="my-auto">Alessandro Palumbo</h4>
                     </Col>
                     <Col className="p-0 mt-auto mb-auto" md={4} sm={12}></Col>
                     <Col className="p-0 mt-auto mb-auto font-novel-sans" md={4} sm={12}>
