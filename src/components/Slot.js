@@ -6,36 +6,23 @@ import html2canvas from 'html2canvas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
 
-import Dress0 from '../assets/salvinification/Ken.png';
-import Dress1 from '../assets/salvinification/0.png';
-import Dress2 from '../assets/salvinification/1.png';
-import Dress3 from '../assets/salvinification/2.png';
-import Dress4 from '../assets/salvinification/3.png';
-import Dress5 from '../assets/salvinification/4.png';
-
-import face0 from '../assets/salvinification/face0.png';
-import face1 from '../assets/salvinification/face1.png';
+import * as Constants from '../Constants'
 
 
 const { Component } = React;
 const downloadIcon = <FontAwesomeIcon icon={faFileDownload} />
 
 class Slot extends Component {
-  static defaultProps = {
-    faces: [face0, face1],
-    dresses: [Dress0, Dress1, Dress2, Dress3, Dress4, Dress5],
-    names: ["", "Spock-vini", "S.W.A.Tvini", "Salvini carramba", "Salvini ufficiale", "Salvini pulotto"]
-  };
-
   constructor(props) {
     super(props);
     this.state = { 
-      slot: Dress0,
-      face: face0,
-      name: null,
+      slot: Constants.dresses[0],
+      face: Constants.faces[0],
+      name: "",
       rolling: false,
       lastBodyOption: null,
-      lastFaceOption: null
+      lastFaceOption: null,
+        pageWidth: window.innerWidth,
     };
 
     this.faceSlotRef = React.createRef();
@@ -71,28 +58,29 @@ class Slot extends Component {
     }
     let options = ref.children;
     let randomOption = this.avoidFaceDuplicateOption();
-    console.log(randomOption);
     let choosenOption = options[randomOption];
     setTop(-choosenOption.offsetTop);
-    return Slot.defaultProps.faces[randomOption];
+    return Constants.faces[randomOption];
   };
 
   // Don't permit to extract the same random number of the precedent
   avoidFaceDuplicateOption = () => {
-    let random = Math.floor(Math.random() * Slot.defaultProps.faces.length);
+    let random = Math.floor(Math.random() * Constants.faces.length);
 
     while (random === this.state.lastFaceOption) {
-      random = Math.floor(Math.random() * Slot.defaultProps.faces.length);
+      random = Math.floor(Math.random() * Constants.faces.length);
     }
     
     this.setState({ lastFaceOption: random });
 
-    setTimeout(() => {
-      if (this.captureBtnRef.current.style.display !== "block") {
-        this.captureBtnRef.current.style.display = "block";
-        this.captureLabelRef.current.style.display = "block";
-      }
-    }, 600);
+    // setTimeout(() => {
+    //   if (this.state.pageWidth > 600) {
+    //     if (this.captureBtnRef.current.style.display !== "block") {
+    //       this.captureBtnRef.current.style.display = "block";
+    //       this.captureLabelRef.current.style.display = "block";
+    //     }
+    //   }
+    // }, 600);
 
     return random;
   }
@@ -118,23 +106,25 @@ class Slot extends Component {
     let randomOption = this.avoidBodyDuplicateOption();
     let choosenOption = options[randomOption];
     setTop(-choosenOption.offsetTop + 2);
-    return Slot.defaultProps.dresses[randomOption];
+    return Constants.dresses[randomOption];
   };
 
   avoidBodyDuplicateOption = () => {
-    let random = Math.floor(Math.random() * Slot.defaultProps.dresses.length);
+    let random = Math.floor(Math.random() * Constants.dresses.length);
 
     while (random === this.state.lastOption || random === 0) {
-      random = Math.floor(Math.random() * Slot.defaultProps.dresses.length);
+      random = Math.floor(Math.random() * Constants.dresses.length);
     }
     
     this.setState({ lastOption: random });
 
     setTimeout(() => {
-      this.setState({ name: Slot.defaultProps.names[random] });
-      if (this.captureBtnRef.current.style.display !== "block") {
-        this.captureBtnRef.current.style.display = "block";
-        this.captureLabelRef.current.style.display = "block";
+      this.setState({ name: Constants.names[random] });
+      if (this.state.pageWidth > 600) {
+        if (this.captureBtnRef.current.style.display !== "block") {
+          this.captureBtnRef.current.style.display = "block";
+          this.captureLabelRef.current.style.display = "block";
+        }
       }
     }, 600);
 
@@ -176,7 +166,7 @@ class Slot extends Component {
               <div id="face-slot">
                 <section className="face-section">
                   <div className="slot-container" ref={this.faceSlotRef}>
-                    {Slot.defaultProps.faces.map((face, i) => (
+                    {Constants.faces.map((face, i) => (
                       <div key={i}>
                         <img className="salvini-face" src={face} alt="salvini's face" />
                       </div>
@@ -187,9 +177,9 @@ class Slot extends Component {
               <div id="body-slot">
                 <section className="body-section">
                   <div className="slot-container" ref={this.bodySlotRef}>
-                    {Slot.defaultProps.dresses.map((dress, i) => (
+                    {Constants.dresses.map((dress, i) => (
                       <div key={i}>
-                        <img className="salvini-dress" src={dress} alt="salvini's dress" />
+                        <img className="salvini-dress my-2" src={dress} alt="salvini's dress" />
                       </div>
                     ))}
                   </div>
@@ -206,10 +196,10 @@ class Slot extends Component {
             <div className={!this.state.rolling ? "roll-body rolling mx-auto my-2" : "roll-body mx-auto my-2"} onClick={!this.state.rolling ? this.rollBody :  undefined} disabled={this.state.rolling} >
               {this.state.rolling ? "Rolling..." : "ROLL BODY"}
             </div>
-            <div className={!this.state.rolling ? "roll rolling mx-auto my-2" : "roll mx-auto my-2"} onClick={!this.state.rolling ? this.rollBoth :  undefined} disabled={this.state.rolling} >
+            <div className={!this.state.rolling ? "roll rolling mx-auto mt-2 mb-4" : "roll mx-auto mt-2 mb-4"} onClick={!this.state.rolling ? this.rollBoth :  undefined} disabled={this.state.rolling} >
               {this.state.rolling ? "Rolling..." : "ROLL BOTH"} 
             </div>
-            <div className="screenshot mx-auto mt-4" onClick={this.screenshot} ref={this.captureBtnRef} disabled={this.state.rolling} target="_self">
+            <div className="screenshot mx-auto mt-2" onClick={this.screenshot} ref={this.captureBtnRef} disabled={this.state.rolling}>
               SAVE HIM {downloadIcon}
             </div>
             <p ref={this.captureLabelRef} className="screenshot-label text-muted">Desktop only</p>

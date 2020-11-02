@@ -13,6 +13,7 @@ import SalvinificationPage from './pages/SalvinificationPage';
 import AuroraDetailPage from './pages/AuroraDetailPage'
 
 import logo from './assets/images/AP_logo_hot.svg';
+import logo2 from './assets/images/AP_square.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,11 +32,11 @@ class App extends React.Component {
       home: {
         title: 'Alessandro Palumbo',
         subtitle: 'Welcome to my crazy place 🤪',
-        text: 'Check out my projects below, contact me, or just have fun playing Salvinification'
+        text: 'Check out my projects below, contact me, or just have fun playing Salvinification',
       },
       about: {
         title: 'Hi there!',
-        subtitle: 'Nice to meet you 😁'
+        subtitle: 'Nice to meet you 😁',
       },
       salvinification: {
         title: 'Salvinification 2.0',
@@ -50,8 +51,8 @@ class App extends React.Component {
 
   componentDidMount() {
     document.title="Alessandro Palumbo";
+    console.log(this.props.location);
   }
-
 
   render() {
     let randomBg = Math.floor(Math.random() * this.state.bgTypes.length);
@@ -61,7 +62,9 @@ class App extends React.Component {
       <Router>
         <Container id="my-main-wrapper" className="p-0" fluid={true}>
           <Navbar className={this.state.navClass[randomBg]} bg="transparent" expand="md">
-            <Navbar.Brand><Link to="/"><img id="nav-logo" src={logo} alt="Il mio logo" /></Link></Navbar.Brand>
+            <Navbar.Brand>
+              <Link to="/">
+                <img id="nav-logo" src={window.location.pathname === "/salvinification" ? logo2 : logo } alt="Il mio logo" /></Link></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
@@ -70,12 +73,12 @@ class App extends React.Component {
                 <Link className={this.state.navLinkClass[randomBg]} to="/salvinification">Salvinification</Link>
               </Nav>
             </Navbar.Collapse>
-            <ParticlesBg color="#000000" type={bgType} num={15} bg={true} />
+            <ParticlesBg color="#111111" type={bgType} num={10} bg={true} />
           </Navbar>
 
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} />} />
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} />} />
-          <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} />} />
+          <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} setLogo={this.swapLogo} />} />
           <Route path="/projects/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} />} />
         </Container>
         <Footer fluid={true} />
@@ -85,3 +88,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+// onClick={() => this.swapLogo(false)}

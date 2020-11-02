@@ -6,7 +6,8 @@ import Col from 'react-bootstrap/Col';
 import Slot from '../components/Slot'
 import Hero from '../components/Hero';
 
-function SalvinificationPageTest(props) {
+function SalvinificationPage(props) {
+
   return (
     <Container fluid={true}>
       <Row>
@@ -21,5 +22,5 @@ function SalvinificationPageTest(props) {
 }
 
 
-export default SalvinificationPageTest;
+export default SalvinificationPage;
 

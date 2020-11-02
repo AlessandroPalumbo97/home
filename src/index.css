@@ -18,6 +18,24 @@ p {
   max-width: 200px;
 }
 
+.nav-link {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+.nav-link:hover {
+  transition: 0.15s;
+  padding-top: 11.5px;
+  border-top: 3px solid #FFCE00;
+  border-bottom: 3px solid #FFCE00;
+}
+
+.nav-link:active {
+  border-top: 6px solid #FFCE00;
+  border-bottom: 6px solid #FFCE00;
+  padding-top: 8px;
+}
+
 .my-card {
   margin: 20px;
 }
@@ -54,7 +72,7 @@ p {
 #my-footer {
   min-height: 7.555vh;
   flex-shrink: none;
-  background-color: #000000;
+  background-color: #111111;
 }
 
 .font-lust {
@@ -168,7 +186,7 @@ img {
 #body-slot {
   position: relative;
   width: 400px;
-  height: 800px;
+  height: 650px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -182,8 +200,7 @@ img {
 }
 
 .face-section {
-  min-width: 400px;
-  max-width: 700px;
+  width: 400px;
   height: 200px;
   position: absolute;
   top: 175px;
@@ -195,10 +212,8 @@ img {
 }
 
 .body-section {
-  min-width: 400px;
-  min-height: 650px;
-  max-width: 700px;
-  max-height: 1100px;
+  width: 400px;
+  height: 650px;
   position: absolute;
   overflow: hidden;
   color: white;
@@ -213,6 +228,7 @@ img {
   position: absolute;
   top: 2px;
   width: 100%;
+  height: 650px;
   transition: top ease-in-out 0.5s;
   text-align: center;
 }
@@ -222,7 +238,7 @@ img {
 }
 
 .roll-body {
-  background-color: transparent;
+  background-color: #FFFFFF;
 }
 
 .roll {
@@ -240,7 +256,7 @@ img {
 }
 
 .rolling {
-  animation: blinkingText 1.2s infinite;
+  animation: blinkingText 1.7s infinite;
 }
 
 .screenshot {

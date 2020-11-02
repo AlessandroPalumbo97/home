@@ -6,8 +6,6 @@ function CardInfo(props) {
   
   const style = useSpring({opacity: 1, from: {opacity: 0}})
 
-  console.log(props.id);
-
   return(
     <animated.div className="my-card-info" style={style}>
       <p className="my-card-title font-reross-quad">{props.title}</p>
