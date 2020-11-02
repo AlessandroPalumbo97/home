@@ -18,12 +18,6 @@ p {
   max-width: 200px;
 }
 
-#bg {
-  position: absolute;
-  top: 1200px;
-  left: 1000px;
-}
-
 .my-card {
   margin: 20px;
 }

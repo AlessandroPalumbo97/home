@@ -15,9 +15,9 @@ import AuroraDetailPage from './pages/AuroraDetailPage'
 import logo from './assets/images/AP_logo_hot.svg';
 
 let bgConfig = {
-  num: [4, 7],
+  num: [5, 10],
   rps: 0.1,
-  radius: [5, 40],
+  radius: [30, 40],
   life: [1.5, 3],
   v: [2, 3],
   tha: [-40, 40],
@@ -25,11 +25,11 @@ let bgConfig = {
   // rotate: [0, 20],
   alpha: [0.6, 0],
   scale: [1 , 0.1],
-  position: {x:1,y:1,width: window.innerWidth,height: window.innerHeight},
+  position: {x:1,y:1,width: 10000, height: 200},
   color: ["random", "#ff0000"],
   cross: "dead", // cross or bround
   random: 15,  // or null,
-  g: 5,    // gravity
+  g: 15,    // gravity
   // f: [2, -1], // force
   onParticleUpdate: (ctx, particle) => {
       ctx.beginPath();
@@ -95,7 +95,7 @@ class App extends React.Component {
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} />} />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} />} />
           <Route path="/projects/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} />} />
-          <ParticlesBg id="bg" color="#dc3545" type="custom" config={bgConfig} num={40} bg={true} />
+          <ParticlesBg color="#F7A000" type="cobweb" num={50} bg={true} />
 
         </Container>
         <Footer fluid={true} />
