@@ -14,6 +14,32 @@ import AuroraDetailPage from './pages/AuroraDetailPage'
 
 import logo from './assets/images/AP_logo_hot.svg';
 
+let bgConfig = {
+  num: [4, 7],
+  rps: 0.1,
+  radius: [5, 40],
+  life: [1.5, 3],
+  v: [2, 3],
+  tha: [-40, 40],
+  // body: "./img/icon.png", // Whether to render pictures
+  // rotate: [0, 20],
+  alpha: [0.6, 0],
+  scale: [1 , 0.1],
+  position: {x:1,y:1,width: window.innerWidth,height: window.innerHeight},
+  color: ["random", "#ff0000"],
+  cross: "dead", // cross or bround
+  random: 15,  // or null,
+  g: 5,    // gravity
+  // f: [2, -1], // force
+  onParticleUpdate: (ctx, particle) => {
+      ctx.beginPath();
+      ctx.rect(particle.p.x, particle.p.y, particle.radius * 2, particle.radius * 2);
+      ctx.fillStyle = particle.color;
+      ctx.fill();
+      ctx.closePath();
+  }
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -54,7 +80,7 @@ class App extends React.Component {
       <Router>
         <Container className="p-0 my-main-wrapper" fluid={true}>
           <Navbar className="font-reross-quad" bg="dark" expand="md">
-            <Navbar.Brand><Link to="/"><img src={logo} alt="Il mio logo" /></Link></Navbar.Brand>
+            <Navbar.Brand><Link to="/"><img id="nav-logo" src={logo} alt="Il mio logo" /></Link></Navbar.Brand>
             <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
@@ -69,7 +95,7 @@ class App extends React.Component {
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} />} />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} />} />
           <Route path="/projects/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} />} />
-          <ParticlesBg type="cobweb" num={80} bg={true} />
+          <ParticlesBg id="bg" color="#dc3545" type="custom" config={bgConfig} num={40} bg={true} />
 
         </Container>
         <Footer fluid={true} />
