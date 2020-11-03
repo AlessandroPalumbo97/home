@@ -6,19 +6,25 @@ import Col from 'react-bootstrap/Col';
 import Slot from '../components/Slot'
 import Hero from '../components/Hero';
 
-function SalvinificationPage(props) {
+class SalvinificationPage extends React.Component {
 
-  return (
-    <Container fluid={true}>
-      <Row>
-        <Col className="bg-danger flag" sm={12} md={4}></Col>
-        <Col className="bg-light flag" sm={12} md={4}></Col>
-        <Col className="bg-success flag" sm={12} md={4}></Col>
-      </Row>
-      <Hero title={props.title} subTitle={props.subTitle} /> 
-      <Slot />
-    </Container>
-  );
+  componentDidMount() {
+    this.props.setRoute("/salvinification");
+  }
+
+  render() {
+    return (
+      <Container fluid={true}>
+        <Row>
+          <Col className="bg-success flag" sm={12} md={4}></Col>
+          <Col className="bg-light flag" sm={12} md={4}></Col>
+          <Col className="bg-danger flag" sm={12} md={4}></Col>
+        </Row>
+        <Hero title={this.props.title} subTitle={this.props.subTitle} /> 
+        <Slot />
+      </Container>
+    );
+  }
 }
 
 
