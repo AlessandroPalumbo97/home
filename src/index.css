@@ -97,6 +97,16 @@ img {
   min-height: 7.555vh;
   flex-shrink: none;
   background-color: #111111;
+  position: relative;
+}
+
+#footer-bg {
+  position: absolute !important;
+  bottom: 0 !important;
+}
+
+.footer-link {
+  z-index: 1000;
 }
 
 .font-lust {

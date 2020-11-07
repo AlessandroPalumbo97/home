@@ -92,6 +92,28 @@ import Dress86 from './assets/salvinification/86.png';
 import Dress87 from './assets/salvinification/87.png';
 import Dress88 from './assets/salvinification/88.png';
 import Dress89 from './assets/salvinification/89.png';
+import Dress90 from './assets/salvinification/90.png';
+import Dress91 from './assets/salvinification/91.png';
+import Dress92 from './assets/salvinification/92.png';
+import Dress93 from './assets/salvinification/93.png';
+import Dress94 from './assets/salvinification/94.png';
+import Dress95 from './assets/salvinification/95.png';
+import Dress96 from './assets/salvinification/96.png';
+import Dress97 from './assets/salvinification/97.png';
+import Dress98 from './assets/salvinification/98.png';
+import Dress99 from './assets/salvinification/99.png';
+import Dress100 from './assets/salvinification/100.png';
+import Dress101 from './assets/salvinification/101.png';
+import Dress102 from './assets/salvinification/102.png';
+import Dress103 from './assets/salvinification/103.png';
+import Dress104 from './assets/salvinification/104.png';
+import Dress105 from './assets/salvinification/105.png';
+import Dress106 from './assets/salvinification/106.png';
+import Dress107 from './assets/salvinification/107.png';
+import Dress108 from './assets/salvinification/108.png';
+import Dress109 from './assets/salvinification/109.png';
+
+
 
 
 export const faces = [
@@ -190,7 +212,27 @@ export const dresses = [
   Dress86,
   Dress87,
   Dress88,
-  Dress89
+  Dress89,
+  Dress90, 
+  Dress91,
+  Dress92,
+  Dress93,
+  Dress94,
+  Dress95,
+  Dress96,
+  Dress97,
+  Dress98,
+  Dress99,
+  Dress100,
+  Dress101,
+  Dress102,
+  Dress103,
+  Dress104,
+  Dress105,
+  Dress106,
+  Dress107,
+  Dress108,
+  Dress109,
 ];
 
 export const names = [
@@ -261,7 +303,7 @@ export const names = [
   "Rick Salvchez",
   "Matteo Auditore",
   "Papa Salvesco",
-  "Salvina Elisabetta",
+  "Regina Elisalvetta",
   "Mugiwara no Salvini",
   "Buddhini",
   "Matteo Bonaparte",
@@ -280,11 +322,29 @@ export const names = [
   "Salv Branningan",
   "Matteo il barbaro",
   "Salvini dio della guerra",
-  "Salvini Ebbasta",
+  "$alvini €bbasta",
   "BIG SALVO",
   "Borattino",
   "Salvis Presley",
   "Oliver Salvton",
-  "Ronald McSalvini"
-
+  "Ronald McSalvini",
+  "Salien",
+  "Salvatar",
+  "Wookvini",
+  "Salvpool",
+  "Salvini Kruger",
+  "Salvini witcher",
+  "Giorno Mattea",
+  "Salv Bond",
+  "Jason Salvhoorhees",
+  "Salv Cena",
+  "Ken il politico",
+  "Salvini l'eletto",
+  "Salvator",
+  "Salvini schockante",
+  "Sub-vini",
+  "Salvinator",
+  "Salvini the rock",
+  "Salvini immigrato",
+  "Salvini Wassim"
 ];
