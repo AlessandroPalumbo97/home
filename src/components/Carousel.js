@@ -9,6 +9,8 @@ import nervousLink from '../assets/compressed/nervous_fighter.zip';
 
 import auroraCard from '../assets/images/cards/auroraCardx2.png';
 
+import printCard from '../assets/images/cards/printCardx2.png';
+
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +30,16 @@ class Carousel extends React.Component {
           title: 'Aurora',
           subTitle: '3D printed robot dog!',
           imgSrc: auroraCard,
-          link: '/projects/aurora',
+          link: '/aurora',
+          selected: false,
+          downloadable: false
+        },
+        {
+          id: 2,
+          title: 'Printed is better',
+          subTitle: '3D print is amazing, check it out!',
+          imgSrc: printCard,
+          link: '/3Dprint',
           selected: false,
           downloadable: false
         },

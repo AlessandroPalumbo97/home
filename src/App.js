@@ -7,13 +7,18 @@ import './App.css';
 import ParticlesBg from 'particles-bg';
 
 import Footer from './components/Footer';
+
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import SalvinificationPage from './pages/SalvinificationPage';
+import PrintPage from './pages/PrintPage';
 import AuroraDetailPage from './pages/AuroraDetailPage'
 
-import logo from './assets/images/AP_logo_hot.svg';
-import logo2 from './assets/images/AP_logo_italian.svg';
+import logoHot from './assets/images/AP_logo_hot.svg';
+import logoIta from './assets/images/AP_logo_italian.svg';
+import logoAurora from './assets/images/AP_logo_aurora.svg';
+
+import Me from './assets/images/me.jpg';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +30,8 @@ class App extends React.Component {
         { title: 'Home', path: '/' },
         { title: 'About', path: '/about' },
         { title: 'Salvinification', path: '/salvinification' },
-        { title: 'Aurora', path: '/projects/aurora' },
+        { title: '3D print', path: '/3Dprint' },
+        { title: 'Aurora', path: '/aurora' },
       ],
       home: {
         title: 'Alessandro Palumbo',
@@ -35,10 +41,15 @@ class App extends React.Component {
       about: {
         title: 'Hi there!',
         subtitle: 'Nice to "meet" you 😁',
+        photo: Me
       },
       salvinification: {
         title: 'Salvinification 2.0',
         subTitle: 'Have fun changing our favourite superhero\'s dresses',
+      },
+      print: {
+        title: 'Inspiration turned into reality',
+        subTitle: '3D print allows you to dream, project and realize your most insane fantasy',
       },
       aurora: {
         title: 'Aurora',
@@ -52,7 +63,6 @@ class App extends React.Component {
   }
 
   swapLogo = (r) => {
-    console.log(r);
     this.setState({ currentRoute: r });
   }
 
@@ -63,7 +73,12 @@ class App extends React.Component {
           <Navbar id="navbar" className="font-reross-quad navbar-dark" expand="md">
             <Navbar.Brand id="nav-logo">
               <Link to="/">
-                <img src={this.state.currentRoute === "/salvinification" ? logo2 : logo } alt="Il mio logo" /></Link></Navbar.Brand>
+                {this.state.currentRoute === "/salvinification" && <img src={logoIta} alt="My logo" />}
+                {this.state.currentRoute === "/aurora" && <img src={logoAurora} alt="My logo" />}
+                {this.state.currentRoute !== "/salvinification" && this.state.currentRoute !== "/aurora" && <img src={logoHot} alt="My logo" />}
+                
+              </Link>
+            </Navbar.Brand>
             <Navbar.Toggle className="border-0 nav-link" aria-controls="navbar-toggle" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className="ml-auto">
@@ -76,9 +91,10 @@ class App extends React.Component {
           </Navbar>
 
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} setRoute={this.swapLogo} />} />
-          <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} setRoute={this.swapLogo} />}  />
+          <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} photo={this.state.about.photo} setRoute={this.swapLogo} />}  />
           <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} setRoute={this.swapLogo} />} />
-          <Route path="/projects/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} setRoute={this.swapLogo} />} />
+          <Route path="/3Dprint" exact render={() => <PrintPage title={this.state.print.title} subTitle={this.state.print.subTitle} setRoute={this.swapLogo} />} />
+          <Route path="/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} setRoute={this.swapLogo} />} />
         </Container>
         <Footer fluid={true} />
       </Router>

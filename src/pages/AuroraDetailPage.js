@@ -14,6 +14,11 @@ import render4 from '../assets/images/aurora/render4.png';
 
 
 class AuroraDetailPage extends React.Component {
+    
+    componentDidMount() {
+        this.props.setRoute("/aurora");
+    }
+
     render() {
         return (
             <div>
