@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "aa0b9842557f7471b562e5cb2163b579",
+    "revision": "327c9b610b3c9b83887a1abf9c1c69ce",
     "url": "/index.html"
   },
   {
-    "revision": "465bcc9834730688a1be",
+    "revision": "217a89dbb9ae0e44dc38",
     "url": "/static/css/2.6414bb7b.chunk.css"
   },
   {
-    "revision": "59119064eb86b16ea5c2",
-    "url": "/static/css/main.97be157e.chunk.css"
+    "revision": "c4fa7524552579ff767f",
+    "url": "/static/css/main.e853ad66.chunk.css"
   },
   {
-    "revision": "465bcc9834730688a1be",
-    "url": "/static/js/2.c5353892.chunk.js"
+    "revision": "217a89dbb9ae0e44dc38",
+    "url": "/static/js/2.b6f91a50.chunk.js"
   },
   {
     "revision": "4b17ffd512bf3b522d67b4799738ff0e",
-    "url": "/static/js/2.c5353892.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.b6f91a50.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "59119064eb86b16ea5c2",
-    "url": "/static/js/main.d0a61bbd.chunk.js"
+    "revision": "c4fa7524552579ff767f",
+    "url": "/static/js/main.b76c0242.chunk.js"
   },
   {
     "revision": "efe25b4b8d1f7af9da4b",
@@ -468,6 +468,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/99.e25162d7.png"
   },
   {
+    "revision": "795001aa4e2a77ae7e11bd19c90f72b2",
+    "url": "/static/media/AP_logo_aurora.795001aa.svg"
+  },
+  {
     "revision": "8ff41fce3d33f44c435ef5c88bc1b615",
     "url": "/static/media/AP_logo_hot.8ff41fce.svg"
   },
@@ -508,12 +512,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/face1.392a9416.png"
   },
   {
+    "revision": "286f61c0c8621e6015a39319fb877d9b",
+    "url": "/static/media/me.286f61c0.jpg"
+  },
+  {
     "revision": "e835a5cd7a4891dfa7bf9bd6cce75e31",
     "url": "/static/media/nervousCardx2.e835a5cd.png"
   },
   {
     "revision": "43f0a2586f1e5f287672f279f8dac731",
     "url": "/static/media/nervous_fighter.43f0a258.zip"
+  },
+  {
+    "revision": "c18bd8a4c3a3788db12df1fe6c40b058",
+    "url": "/static/media/printCardx2.c18bd8a4.png"
   },
   {
     "revision": "853f6d43364fc0f20fbc8847b2d1c9ae",
