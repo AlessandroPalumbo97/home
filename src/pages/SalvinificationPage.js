@@ -7,11 +7,6 @@ import Slot from '../components/Slot'
 import Hero from '../components/Hero';
 
 class SalvinificationPage extends React.Component {
-
-  componentDidMount() {
-    this.props.setRoute("/salvinification");
-  }
-
   render() {
     return (
       <Container fluid={true}>

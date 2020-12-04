@@ -1,5 +1,5 @@
 import React from 'react';
-import { Connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
@@ -60,6 +60,7 @@ class App extends React.Component {
 
   componentDidMount() {
     document.title = this.state.title;
+    console.log(this.props.gigi.currentRoute);
   }
 
   swapLogo = (r) => {
@@ -73,10 +74,9 @@ class App extends React.Component {
           <Navbar id="navbar" className="font-reross-quad navbar-dark" expand="md">
             <Navbar.Brand id="nav-logo">
               <Link to="/">
-                {this.state.currentRoute === "/salvinification" && <img src={logoIta} alt="My logo" />}
+                {this.props.gigi.currentRoute === "/salvinification" && <img src={logoIta} alt="My logo" />}
                 {this.state.currentRoute === "/aurora" && <img src={logoAurora} alt="My logo" />}
                 {this.state.currentRoute !== "/salvinification" && this.state.currentRoute !== "/aurora" && <img src={logoHot} alt="My logo" />}
-                
               </Link>
             </Navbar.Brand>
             <Navbar.Toggle className="border-0 nav-link" aria-controls="navbar-toggle" />
@@ -84,15 +84,15 @@ class App extends React.Component {
               <Nav className="ml-auto">
                 <Link className="nav-link text-light" to="/">Home</Link>
                 <Link className="nav-link text-light" to="/about">About</Link>
-                <Link className="nav-link text-light" to="/salvinification">Salvinification</Link>
+                <Link className="nav-link text-light" to="/salvinification" onClick={this.props.onPageChanged}>Salvinification</Link>
               </Nav>
             </Navbar.Collapse>
             <ParticlesBg color="#ffffff" type={"cobweb"} num={10} bg={true} />
           </Navbar>
-
+ 
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} setRoute={this.swapLogo} />} />
           <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} photo={this.state.about.photo} setRoute={this.swapLogo} />}  />
-          <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} setRoute={this.swapLogo} />} />
+          <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} />} />
           <Route path="/3Dprint" exact render={() => <PrintPage title={this.state.print.title} subTitle={this.state.print.subTitle} setRoute={this.swapLogo} />} />
           <Route path="/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} setRoute={this.swapLogo} />} />
         </Container>
@@ -104,8 +104,14 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    main: state.main
+    gigi: state.main
   };
 };
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    onPageChanged: () => dispatch({type: 'PAGE_CHANGED'})
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

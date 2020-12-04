@@ -1,4 +1,12 @@
 import Me from '../assets/images/me.jpg';
+import * as Constants from '../Constants'
+
+import nervousCard from '../assets/images/cards/nervousCardx2.png';
+import nervousLink from '../assets/compressed/nervous_fighter.zip';
+
+import auroraCard from '../assets/images/cards/auroraCardx2.png';
+
+import printCard from '../assets/images/cards/printCardx2.png';
 
 const initialState = {
   main: {
@@ -33,11 +41,57 @@ const initialState = {
       title: 'Aurora',
       subTitle: 'Aurora is a robotic dog, thought and originated from scratch',
     },
+  }, 
+  slot: { 
+    slot: Constants.dresses[0],
+    face: Constants.faces[0],
+    name: "",
+    rolling: false,
+    lastBodyOption: null,
+    lastFaceOption: null,
+      pageWidth: window.innerWidth,
+  }, 
+  carousel: {
+    items: [
+      {
+        id: 0,
+        title: 'Nervous Fighter!',
+        subTitle: 'My BETA version of a stickman fighter',
+        imgSrc: nervousCard,
+        link: nervousLink,
+        selected: false,
+        downloadable: true
+      },
+      {
+        id: 1,
+        title: 'Aurora',
+        subTitle: '3D printed robot dog!',
+        imgSrc: auroraCard,
+        link: '/aurora',
+        selected: false,
+        downloadable: false
+      },
+      {
+        id: 2,
+        title: 'Printed is better',
+        subTitle: '3D print is amazing, check it out!',
+        imgSrc: printCard,
+        link: '/3Dprint',
+        selected: false,
+        downloadable: false
+      },
+    ]
   }
-  
 }
 
 const reducer = (state = initialState, action) => {
+  if (action.type === "PAGE_CHANGED") {
+    return {
+      ...state.main,
+      currentRoute: "/salvinification"
+      
+    }
+  }
   return state;
 }
 
