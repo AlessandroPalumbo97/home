@@ -12,39 +12,36 @@ import auroraCard from '../assets/images/cards/auroraCardx2.png';
 import printCard from '../assets/images/cards/printCardx2.png';
 
 class Carousel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [
-        {
-          id: 0,
-          title: 'Nervous Fighter!',
-          subTitle: 'My BETA version of a stickman fighter',
-          imgSrc: nervousCard,
-          link: nervousLink,
-          selected: false,
-          downloadable: true
-        },
-        {
-          id: 1,
-          title: 'Aurora',
-          subTitle: '3D printed robot dog!',
-          imgSrc: auroraCard,
-          link: '/aurora',
-          selected: false,
-          downloadable: false
-        },
-        {
-          id: 2,
-          title: 'Printed is better',
-          subTitle: '3D print is amazing, check it out!',
-          imgSrc: printCard,
-          link: '/3Dprint',
-          selected: false,
-          downloadable: false
-        },
-      ]
-    }
+  state = {
+    items: [
+      {
+        id: 0,
+        title: 'Nervous Fighter!',
+        subTitle: 'My BETA version of a stickman fighter',
+        imgSrc: nervousCard,
+        link: nervousLink,
+        selected: false,
+        downloadable: true
+      },
+      {
+        id: 1,
+        title: 'Aurora',
+        subTitle: '3D printed robot dog!',
+        imgSrc: auroraCard,
+        link: '/aurora',
+        selected: false,
+        downloadable: false
+      },
+      {
+        id: 2,
+        title: 'Printed is better',
+        subTitle: '3D print is amazing, check it out!',
+        imgSrc: printCard,
+        link: '/3Dprint',
+        selected: false,
+        downloadable: false
+      },
+    ]
   }
 
   handleCardClick = (id, card) => {

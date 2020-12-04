@@ -1,61 +1,61 @@
 import React from 'react';
+import { Connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import './App.css';
 import ParticlesBg from 'particles-bg';
+import './App.css';
 
+// Components
 import Footer from './components/Footer';
 
+// Pages
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import SalvinificationPage from './pages/SalvinificationPage';
 import PrintPage from './pages/PrintPage';
 import AuroraDetailPage from './pages/AuroraDetailPage'
 
+// Assets
 import logoHot from './assets/images/AP_logo_hot.svg';
 import logoIta from './assets/images/AP_logo_italian.svg';
 import logoAurora from './assets/images/AP_logo_aurora.svg';
-
 import Me from './assets/images/me.jpg';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
+    title: 'Alessandro Palumbo',
+    currentRoute: "/",
+    headerLinks: [
+      { title: 'Home', path: '/' },
+      { title: 'About', path: '/about' },
+      { title: 'Salvinification', path: '/salvinification' },
+      { title: '3D print', path: '/3Dprint' },
+      { title: 'Aurora', path: '/aurora' },
+    ],
+    home: {
       title: 'Alessandro Palumbo',
-      currentRoute: "/",
-      headerLinks: [
-        { title: 'Home', path: '/' },
-        { title: 'About', path: '/about' },
-        { title: 'Salvinification', path: '/salvinification' },
-        { title: '3D print', path: '/3Dprint' },
-        { title: 'Aurora', path: '/aurora' },
-      ],
-      home: {
-        title: 'Alessandro Palumbo',
-        subtitle: 'Welcome to my crazy place 🤪',
-        text: 'Check out my projects below, contact me, or just have fun playing Salvinification',
-      },
-      about: {
-        title: 'Hi there!',
-        subtitle: 'Nice to "meet" you 😁',
-        photo: Me
-      },
-      salvinification: {
-        title: 'Salvinification 2.0',
-        subTitle: 'Have fun changing our favourite superhero\'s dresses',
-      },
-      print: {
-        title: 'Inspiration turned into reality',
-        subTitle: '3D print allows you to dream, project and realize your most insane fantasy',
-      },
-      aurora: {
-        title: 'Aurora',
-        subTitle: 'Aurora is a robotic dog, thought and originated from scratch',
-      },
-    }
+      subtitle: 'Welcome to my crazy place 🤪',
+      text: 'Check out my projects below, contact me, or just have fun playing Salvinification',
+    },
+    about: {
+      title: 'Hi there!',
+      subtitle: 'Nice to "meet" you 😁',
+      photo: Me
+    },
+    salvinification: {
+      title: 'Salvinification 2.0',
+      subTitle: 'Have fun changing our favourite superhero\'s dresses',
+    },
+    print: {
+      title: 'Inspiration turned into reality',
+      subTitle: '3D print allows you to dream, project and realize your most insane fantasy',
+    },
+    aurora: {
+      title: 'Aurora',
+      subTitle: 'Aurora is a robotic dog, thought and originated from scratch',
+    },
   }
 
   componentDidMount() {
@@ -101,5 +101,11 @@ class App extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    main: state.main
+  };
+};
 
 export default App;

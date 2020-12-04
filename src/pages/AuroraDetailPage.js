@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -9,8 +8,8 @@ import draw1 from '../assets/images/aurora/draw1.png';
 import draw2 from '../assets/images/aurora/draw2.png';
 import building1 from '../assets/images/aurora/building1.jpeg';
 import building2 from '../assets/images/aurora/building2.jpg';
-import render3 from '../assets/images/aurora/render3.png';
-import render4 from '../assets/images/aurora/render4.png';
+import render1 from '../assets/images/aurora/render1.png';
+import render2 from '../assets/images/aurora/render2.png';
 
 
 class AuroraDetailPage extends React.Component {
@@ -86,11 +85,11 @@ class AuroraDetailPage extends React.Component {
                     </Col>
 
                     <Col sm={12} md={12} className="p-0">
-                        <img className="aurora-pic" src={render4} alt="aurora\'s render 1" />
+                        <img className="aurora-pic" src={render1} alt="aurora\'s render 1" />
                     </Col>
 
                     <Col sm={12} md={12} className="p-0">
-                        <img className="aurora-pic" src={render3} alt="aurora\'s render 2" />
+                        <img className="aurora-pic" src={render2} alt="aurora\'s render 2" />
                     </Col>
                 </Row>
             </div>

@@ -6,7 +6,7 @@ import Mailto from 'react-protected-mailto';
 import ParticlesBg from 'particles-bg';
 
 
-function Footer() {
+const footer = () => {
 
     return (
         <footer>
@@ -32,4 +32,4 @@ function Footer() {
 
 }
 
-export default Footer;
+export default footer;
