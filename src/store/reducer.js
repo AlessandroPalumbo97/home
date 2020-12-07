@@ -9,6 +9,7 @@ import auroraCard from '../assets/images/cards/auroraCardx2.png';
 import printCard from '../assets/images/cards/printCardx2.png';
 
 const initialState = {
+  test: 0,
   main: {
     title: 'Alessandro Palumbo',
     currentRoute: "/",
@@ -87,9 +88,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   if (action.type === "PAGE_CHANGED") {
     return {
-      ...state.main,
-      currentRoute: "/salvinification"
-      
+      ...state,
+      test: state.test + 5,
     }
   }
   return state;
