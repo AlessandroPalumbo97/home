@@ -13,24 +13,21 @@ const { Component } = React;
 const downloadIcon = <FontAwesomeIcon icon={faFileDownload} />
 
 class Slot extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      slot: Constants.dresses[0],
-      face: Constants.faces[0],
-      name: "",
-      rolling: false,
-      lastBodyOption: null,
-      lastFaceOption: null,
-        pageWidth: window.innerWidth,
-    };
+  state = { 
+    slot: Constants.dresses[0],
+    face: Constants.faces[0],
+    name: "",
+    rolling: false,
+    lastBodyOption: null,
+    lastFaceOption: null,
+    pageWidth: window.innerWidth,
+  };
 
-    this.faceSlotRef = React.createRef();
-    this.bodySlotRef = React.createRef();
-    this.captureBtnRef = React.createRef();
-    this.captureLabelRef = React.createRef();
-    this.screenshotNameRef = React.createRef();
-  }
+  faceSlotRef = React.createRef();
+  bodySlotRef = React.createRef();
+  captureBtnRef = React.createRef();
+  captureLabelRef = React.createRef();
+  screenshotNameRef = React.createRef();
 
   rollBoth = () => {
     this.rollFace();
@@ -72,15 +69,6 @@ class Slot extends Component {
     }
     
     this.setState({ lastFaceOption: random });
-
-    // setTimeout(() => {
-    //   if (this.state.pageWidth > 600) {
-    //     if (this.captureBtnRef.current.style.display !== "block") {
-    //       this.captureBtnRef.current.style.display = "block";
-    //       this.captureLabelRef.current.style.display = "block";
-    //     }
-    //   }
-    // }, 600);
 
     return random;
   }
@@ -216,5 +204,3 @@ class Slot extends Component {
 }
 
 export default Slot
-
-// ReactDOM.render(<Slot />, document.getElementById('react-root'));

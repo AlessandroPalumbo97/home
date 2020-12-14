@@ -5,12 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 class Hero extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isMobile: window.innerWidth < 1200,
-    }
+  state = {
+    isMobile: window.innerWidth < 1200,
   }
 
   componentDidMount() {
