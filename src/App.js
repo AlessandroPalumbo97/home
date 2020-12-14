@@ -25,7 +25,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       title: 'Alessandro Palumbo',
-      currentRoute: "/",
+      currentLogo: logoHot,
       headerLinks: [
         { title: 'Home', path: '/' },
         { title: 'About', path: '/about' },
@@ -62,8 +62,19 @@ class App extends React.Component {
     document.title = this.state.title;
   }
 
-  swapLogo = (r) => {
-    this.setState({ currentRoute: r });
+  setLogoStyle = (style) => {
+    switch (style) {
+      case "italian":
+        this.setState({ currentLogo: logoIta });
+        break;
+      case "aurora":
+        this.setState({ currentLogo: logoAurora });
+        break;
+      case "hot":
+      default:
+        this.setState({ currentLogo: logoHot });
+        break;
+    }
   }
 
   render() {
@@ -73,10 +84,7 @@ class App extends React.Component {
           <Navbar id="navbar" className="font-reross-quad navbar-dark" expand="md">
             <Navbar.Brand id="nav-logo">
               <Link to="/">
-                {this.state.currentRoute === "/salvinification" && <img src={logoIta} alt="My logo" />}
-                {this.state.currentRoute === "/aurora" && <img src={logoAurora} alt="My logo" />}
-                {this.state.currentRoute !== "/salvinification" && this.state.currentRoute !== "/aurora" && <img src={logoHot} alt="My logo" />}
-                
+                <img src={this.state.currentLogo} alt="My logo" />
               </Link>
             </Navbar.Brand>
             <Navbar.Toggle className="border-0 nav-link" aria-controls="navbar-toggle" />
@@ -90,11 +98,11 @@ class App extends React.Component {
             <ParticlesBg color="#ffffff" type={"cobweb"} num={10} bg={true} />
           </Navbar>
 
-          <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} setRoute={this.swapLogo} />} />
-          <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} photo={this.state.about.photo} setRoute={this.swapLogo} />}  />
-          <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} setRoute={this.swapLogo} />} />
-          <Route path="/3Dprint" exact render={() => <PrintPage title={this.state.print.title} subTitle={this.state.print.subTitle} setRoute={this.swapLogo} />} />
-          <Route path="/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} setRoute={this.swapLogo} />} />
+          <Route path="/" exact render={() => <HomePage title={this.state.home.title} subTitle={this.state.home.subtitle} text={this.state.home.text} logoStyle={this.setLogoStyle} />} />
+          <Route path="/about" exact render={() => <AboutPage title={this.state.about.title} subTitle={this.state.about.subtitle} photo={this.state.about.photo} logoStyle={this.setLogoStyle} />}  />
+          <Route path="/salvinification" exact render={() => <SalvinificationPage title={this.state.salvinification.title} subTitle={this.state.salvinification.subTitle} logoStyle={this.setLogoStyle} />} />
+          <Route path="/aurora" exact render={() => <AuroraDetailPage title={this.state.aurora.title} subTitle={this.state.aurora.subTitle} text={this.state.aurora.text} logoStyle={this.setLogoStyle} />} />
+          <Route path="/3Dprint" exact render={() => <PrintPage title={this.state.print.title} subTitle={this.state.print.subTitle} logoStyle={this.setLogoStyle} />} />
         </Container>
         <Footer fluid={true} />
       </Router>

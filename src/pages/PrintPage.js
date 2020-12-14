@@ -6,8 +6,8 @@ import Content from '../components/Content';
 class PrintPage extends React.Component {
     
     componentDidMount() {
-        this.props.setRoute("/about");
-    }    
+        this.props.logoStyle("hot");
+    }
 
     render() {
         return (

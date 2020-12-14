@@ -4,9 +4,9 @@ import Hero from '../components/Hero';
 import Carousel from '../components/Carousel';
 
 class HomePage extends React.Component {
-    
+
     componentDidMount() {
-        this.props.setRoute("/");
+        this.props.logoStyle("hot");
     }
 
     render() {

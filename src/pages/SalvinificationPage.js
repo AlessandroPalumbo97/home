@@ -9,7 +9,7 @@ import Hero from '../components/Hero';
 class SalvinificationPage extends React.Component {
 
   componentDidMount() {
-    this.props.setRoute("/salvinification");
+    this.props.logoStyle("italian");
   }
 
   render() {

@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -16,7 +15,7 @@ import render4 from '../assets/images/aurora/render4.png';
 class AuroraDetailPage extends React.Component {
     
     componentDidMount() {
-        this.props.setRoute("/aurora");
+        this.props.logoStyle("aurora");
     }
 
     render() {
@@ -71,18 +70,16 @@ class AuroraDetailPage extends React.Component {
                     </Col>
 
                     <Col sm={12} md={8} className="p-4 mx-auto my-auto">
-                        <p>
-                            <h4><b>Aurora has:</b></h4>
-                            <ul>
-                                <li>28DOF (20 motorized)</li>
-                                <li>14 1kW brushless motors with custom gearboxes</li>
-                                <li>6 modified 28byj-48 stepper motors</li>
-                                <li>10Ah 24V Li-Po battery</li>
-                                <li>Original design modeled from scratch</li>
-                                <li>Custom link system to absorb shocks</li>
-                                <li>44 different sensors</li>
-                            </ul>
-                        </p>
+                        <h4><b>Aurora has:</b></h4>
+                        <ul>
+                            <li>28DOF (20 motorized)</li>
+                            <li>14 1kW brushless motors with custom gearboxes</li>
+                            <li>6 modified 28byj-48 stepper motors</li>
+                            <li>10Ah 24V Li-Po battery</li>
+                            <li>Original design modeled from scratch</li>
+                            <li>Custom link system to absorb shocks</li>
+                            <li>44 different sensors</li>
+                        </ul>
                     </Col>
 
                     <Col sm={12} md={12} className="p-0">

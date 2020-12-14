@@ -5,10 +5,10 @@ import Content from '../components/Content';
 
 
 class AboutPage extends React.Component {
-    
+
     componentDidMount() {
-        this.props.setRoute("/about");
-    }    
+        this.props.logoStyle("hot");
+    }
 
     render() {
         return (
