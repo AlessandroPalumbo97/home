@@ -28,6 +28,11 @@ img {
 	height: 80%;
 }
 
+.footer-icon {
+  color: #FFCE00 !important;
+  margin: 0 5px;
+}
+
 .hero-photo {
   width: 120px;
   height: 120px;

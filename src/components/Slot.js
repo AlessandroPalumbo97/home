@@ -8,11 +8,9 @@ import { faFileDownload } from '@fortawesome/free-solid-svg-icons'
 
 import * as Constants from '../Constants'
 
-
-const { Component } = React;
 const downloadIcon = <FontAwesomeIcon icon={faFileDownload} />
 
-class Slot extends Component {
+class Slot extends React.Component {
   state = { 
     slot: Constants.dresses[0],
     face: Constants.faces[0],
