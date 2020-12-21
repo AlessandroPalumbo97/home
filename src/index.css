@@ -28,6 +28,11 @@ img {
 	height: 80%;
 }
 
+.logo-png {
+  width: 65%;
+  padding: 15px;
+}
+
 .footer-icon {
   color: #FFCE00 !important;
   margin: 0 5px;

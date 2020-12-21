@@ -15,15 +15,21 @@ import PrintPage from './pages/PrintPage';
 import AuroraDetailPage from './pages/AuroraDetailPage'
 
 import logoHot from './assets/images/AP_logo_hot.svg';
+import logoHotPng from './assets/images/AP_logo_hot.png';
 import logoIta from './assets/images/AP_logo_italian.svg';
+import logoItaPng from './assets/images/AP_logo_italian.png';
 import logoAurora from './assets/images/AP_logo_aurora.svg';
+import logoAuroraPng from './assets/images/AP_logo_aurora.png';
 
 import Me from './assets/images/me.jpg';
 
 class App extends React.Component {
   state = {
     title: 'Alessandro Palumbo',
-    currentLogo: logoHot,
+    currentLogo: {
+      svg: logoHot,
+      png: logoHotPng,
+    },
     headerLinks: [
       { title: 'Home', path: '/' },
       { title: 'About', path: '/about' },
@@ -62,26 +68,36 @@ class App extends React.Component {
   setLogoStyle = (style) => {
     switch (style) {
       case "italian":
-        this.setState({ currentLogo: logoIta });
+        this.setState({ currentLogo: {
+          svg: logoIta,
+          png: logoItaPng,
+        }});
         break;
       case "aurora":
-        this.setState({ currentLogo: logoAurora });
+        this.setState({ currentLogo: {
+          svg: logoAurora,
+          png: logoAuroraPng,
+        } });
         break;
       case "hot":
       default:
-        this.setState({ currentLogo: logoHot });
+        this.setState({ currentLogo: {
+          svg: logoHot,
+          png: logoHotPng,
+        } });
         break;
     }
   }
 
   render() {
+    var isFirefox = typeof InstallTrigger !== 'undefined';
     return (
       <Router>
         <Container id="my-main-wrapper" className="p-0" fluid={true}>
           <Navbar id="navbar" className="font-reross-quad navbar-dark" expand="md">
             <Navbar.Brand id="nav-logo">
               <Link to="/">
-                <img src={this.state.currentLogo} alt="My logo" />
+                {isFirefox ? <img src={this.state.currentLogo.png} className="logo-png" alt="My logo" /> : <img src={this.state.currentLogo.svg} alt="My logo" />}
               </Link>
             </Navbar.Brand>
             <Navbar.Toggle className="border-0 nav-link" aria-controls="navbar-toggle" />
